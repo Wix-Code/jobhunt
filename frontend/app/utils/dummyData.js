@@ -1,4 +1,4 @@
-const NavLinks = [
+export const NavLinks = [
   {
     label: "Home",
     href: "/",
@@ -16,7 +16,7 @@ const NavLinks = [
     href: "/notification",
   },
   {
-    label: "Help",
+    label: "Help Center",
     href: "/help",
   },
 ]
