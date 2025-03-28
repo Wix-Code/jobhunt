@@ -6,7 +6,9 @@ import { FiSearch } from "react-icons/fi";
 
 export const Navbar = () => {
   return (
-    <div className='shadow-[rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px] sticky top-0 bg-white'>
+    <div className='sticky top-0 bg-white'  style={{
+      boxShadow: "box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px"
+    }}>
       <div className='max-w-[1300px] m-auto flex items-center justify-between h-[80px]'>
         <div className=''>
           <Image src="https://www.jobberman.com/static-assets/img/ng/landscape.svg" width={200} height={200} alt='Job hunt'/>
