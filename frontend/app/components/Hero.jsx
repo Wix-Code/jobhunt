@@ -14,7 +14,7 @@ export const Hero = () => {
       <div className='flex flex-col gap-8  bg-blue-700 py-20 justify-center'>
         <h2 className='text-center text-white text-[50px] font-medium'>Explore and discover
           <br /> the right job for you!</h2>
-        <div className='flex gap-3 px-40 py-5 bg-blue-300'>
+        <div className='flex gap-3 px-40 py-5 bg-blue-500'>
           <div onClick={() => toggleDropdown("industry")} className='relative flex-[1] bg-white flex justify-between items-center cursor-pointer text-gray-600'>
             <p className='pl-2'>All function</p>
             <button className='pr-2'>{activeDropdown === "industry" ? <IoIosArrowUp /> : <IoIosArrowDown />}</button>

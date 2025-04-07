@@ -1,17 +1,14 @@
 "use client"
 import React from 'react'
-import { Find } from './components/Find'
-import { RightTalent } from './components/RightTalent'
-import { Upgrade } from './components/Upgrade'
-import { Hero } from './components/Hero'
+import Discover from './subpages/Discover'
+import HomeAbout from './subpages/HomeAbout'
+
 
 export default function page() {
   return (
-    <div className='flex flex-col gap-10'>
-      <Hero />
-      <Find />
-      <Upgrade />
-      <RightTalent />
+    <div className='flex flex-col gap-14'>
+      <HomeAbout />
+      <Discover />
     </div>
   )
 }
