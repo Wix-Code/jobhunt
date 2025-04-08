@@ -8,7 +8,7 @@ const Rooms = () => {
       <p className='text-[#FFFFFF] text-center capitalize text-[44px] font-[600]'>Choose Your Apartment Type</p>
       <div className='grid grid-cols-3 gap-12'>
         {
-          data.map((room) => {
+          data.slice(0,3).map((room) => {
             return (
               <div key={room.id} className='flex flex-col relative'>
                 <div className='overflow-hidden'>
