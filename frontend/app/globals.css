@@ -3,13 +3,18 @@
 .custom-slider-wrapper .slick-slider {
 }
 
-.custom-slider-wrapper .slick-slide{
+.custom-slider-wrapper .slick-slide > div{
   padding: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 10px;
 }
 
 .custom-slider-wrapper .slick-list {
   margin: 0 -10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
 }
