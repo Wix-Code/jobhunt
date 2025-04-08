@@ -1,2 +1,15 @@
 @import "tailwindcss";
 
+.custom-slider-wrapper .slick-slider {
+}
+
+.custom-slider-wrapper .slick-slide{
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.custom-slider-wrapper .slick-list {
+  margin: 0 -10px;
+}
