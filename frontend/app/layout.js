@@ -1,8 +1,15 @@
-import { Roboto } from "next/font/google";
+import { Roboto, Marcellus } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "./components/Navbar";
 
+// Load fonts
 const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const marcellus = Marcellus({
   weight: '400',
   subsets: ['latin'],
   display: 'swap',
@@ -16,9 +23,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={roboto.className}
-      >
+      <body className={`${roboto.className} ${marcellus.className}`}>
         <Navbar />
         {children}
       </body>

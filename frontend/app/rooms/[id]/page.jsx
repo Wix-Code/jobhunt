@@ -10,13 +10,6 @@ import Slider from 'react-slick';
 const details = () => {
   const [open, setOpen] = useState("");
   const [button, setButton] = useState(0)
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };
   const img = [
     "https://www.image.direvhotel.com/14075/1711620359ClassicSuite.jpeg",
     "https://www.image.direvhotel.com/14075/1711620250ExecutiveRoomBedroom-min.jpg",

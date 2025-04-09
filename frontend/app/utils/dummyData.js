@@ -6,20 +6,12 @@ export const NavLinks = [
     href: "/",
   },
   {
-    label: "Find Jobs",
+    label: "Rooms",
     href: "/rooms",
   },
   {
-    label: "saved Jobs",
-    href: "/save",
-  },
-  {
-    label: "Notifications",
-    href: "/notification",
-  },
-  {
-    label: "Help Center",
-    href: "/help",
+    label: "Contact",
+    href: "/contact",
   },
 ]
 
