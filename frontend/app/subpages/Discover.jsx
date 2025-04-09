@@ -5,7 +5,7 @@ const Discover = () => {
     <div className="bg-[#151719] py-14">
       <div className='max-w-[1100px] m-auto flex flex-col gap-6 max-sm:flex-col max-sm:mx-5'>
         <p className="text-center text-[#b99d75] uppercase text-[12px] font-[600]">Local Tours & Activities</p>
-        <h1 className="text-center text-[#FFFFFF] text-[44px] font-semibold">Discover The City Around <br /> Omenma Hotels</h1>
+        <h1 className="text-center text-[#FFFFFF] text-[44px] font-semibold  max-sm:text-[24px]">Discover The City Around <br /> Omenma Hotels</h1>
         <p className="text-center text-[#cfcece] text-[17px]">You are in a city where people are never bored. Immerse yourself in natural environment, <br /> Mbaise culture, seasonal activities and numerous unique places in the state.</p>
         <div className='flex flex-row gap-16 items-center flex-col gap-6 max-sm:flex-col'>
           <div className='p-3 flex flex-col gap-3 border-[1px] border-[#b99d75]'>
