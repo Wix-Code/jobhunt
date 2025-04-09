@@ -22,9 +22,9 @@ const HeroPage = () => {
       backgroundRepeat: "no-repeat",
       height: "100vh",
       color: "white"}}>
-      <div>
-        <p className='uppercase text-center text-[#fcb900] tracking-[2px] font-[600] text-[16px]'>Welcome to WIXAD Hotels, a luxury apartment hotels in Imo State.</p>
-        <p className='text-white marcellus.className tracking-[1px] text-center capitalize font-[700] text-[70px]'>Peace, Comfort & <br /> Luxury</p>
+      <div className='max-sm:mx-5 max-sm:flex max-sm:flex-col max-sm:gap-3'>
+        <p className='uppercase text-center text-[#fcb900] tracking-[2px] font-[600] text-[16px] max-sm:text-[14px]'>Welcome to WIXAD Hotels, a luxury apartment hotels in Imo State.</p>
+        <p className='text-white marcellus.className tracking-[1px] text-center capitalize font-[700] text-[70px] max-sm:text-[30px]'>Peace, Comfort & <br /> Luxury</p>
         <div className='flex max-sm:flex-col max-sm:w-full items-center w-[950px] border-[1px] border-[#fcb900]'>
           <div onClick={() => setOpen(open === "calender" ? "" : "calender")} className='flex flex-row w-full'>
             <div className='flex flex-1 cursor-pointer relative justify-between px-4 py-3'>

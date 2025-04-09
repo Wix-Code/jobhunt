@@ -3,7 +3,7 @@ import React from 'react'
 const HomeAbout = () => {
   return (
     <div className='bg-[#151719]'>
-      <div className='flex items-center flex-row max-w-[1100px] m-auto max-sm:flex-col max-sm:mx-5 max-sm:gap-4'>
+      <div className='flex items-center flex-row max-w-[1100px] m-auto max-sm:flex-col max-sm:mx-10 max-sm:gap-4'>
         <div className='flex-1 flex-col flex gap-4'>
           <p className='text-[#b99d75] uppercase text-[14px] font-[600]'>Stay in the heart of Senerity</p>
           <h1 className='text-[#FFFFFF] text-[44px] font-semibold max-sm:text-[24px]'>Luxury furnished serviced rooms in Mbaise, Imo State</h1>
