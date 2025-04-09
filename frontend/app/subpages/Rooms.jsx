@@ -6,7 +6,7 @@ const Rooms = () => {
     <div className='max-w-[1100px] m-auto flex flex-col gap-3'>
       <p className='text-[#b99d75] uppercase mt-4 text-[12px] font-[600] text-center'>Extraordinary Accommodations</p>
       <p className='text-[#FFFFFF] text-center capitalize text-[44px] font-[600]  max-sm:text-[24px]'>Choose Your Apartment Type</p>
-      <div className='grid grid-cols-3 gap-12 max-sm:grid max-sm:grid-cols-1 max-sm:mx-10'>
+      <div className='grid grid-cols-3 gap-12 max-sm:grid max-sm:grid-cols-1 max-sm:mx-7'>
         {
           data.slice(0,3).map((room) => {
             return (
