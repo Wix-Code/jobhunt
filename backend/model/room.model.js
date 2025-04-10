@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose"
+import mongoose from "mongoose"
 
 const roomSchema = new mongoose.Schema({
   desc: {
@@ -8,23 +8,15 @@ const roomSchema = new mongoose.Schema({
     type: String, required: true
   },
   price: {
-    type: String, required: true
+    type: Number, required: true
   },
   img: {
     type: Array, required: true
   },
-  email: {
-    type: String, required: true
+  filter: {
+    type: String, required: false
   },
-  password: {
-    type: String, required: true
-  },
-  type: {
-    type: String, required: true
-  },
-  userId: {
-    type: String, required: true, ref: "User"
-  }
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 }, { timestamps: true });
 
 const Room = mongoose.model('Room', roomSchema);

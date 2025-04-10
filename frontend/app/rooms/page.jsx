@@ -6,9 +6,22 @@ import Location from '../subpages/Location';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+import { DateRange, DateRangePicker } from 'react-date-range';
+import { addDays, format } from 'date-fns';
 
 const FindPage = () => {
   const [menu, setMenu] = useState("Executive")
+  format(new Date(2014, 1, 11), "yyyy-MM-dd");
+  const [open, setOpen] = useState("")
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
 
   var settings = {
     dots: true,
@@ -45,16 +58,101 @@ const FindPage = () => {
     ]
   };
   return <div className='bg-[#151719]'>
+    <div className='flex justify-center items-center' style={{backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url("https://www.thegeorgelagos.com/assets/george-hotel/images/Studio-Suites.jpg")`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      height: "100vh",
+      color: "white"}}>
+      <div className='max-sm:mx-5 max-sm:flex max-sm:flex-col max-sm:gap-3'>
+        <p className='text-white marcellus.className tracking-[1px] text-center capitalize font-[700] text-[70px] max-sm:text-[30px]'>Book Your Stay</p>
+        <p className='uppercase text-center text-[#fcb900] my-10 tracking-[2px] font-[600] text-[16px] max-sm:text-[14px]'>A stay infused with creativity and culture.</p>
+        <div className='flex max-sm:flex-col max-sm:w-full items-center w-[950px] border-[1px] border-[#fcb900]'>
+          <div onClick={() => setOpen(open === "calender" ? "" : "calender")} className='flex flex-row w-full max-sm:flex-col'>
+            <div className='flex flex-1 cursor-pointer relative justify-between px-4 py-3'>
+              <p className='text-white text-[14px]'>Check In</p>
+              <p className='text-white text-[14px]'>{state[0].startDate ? format(state[0].startDate, 'yyyy-MM-dd') : ''}</p>
+              <div className='absolute bottom-[-225px] z-10 top-0 left-0'>
+              {
+                open === "calender" && (
+                  <div onClick={(e) => {
+                    e.stopPropagation();
+                  }} className='absolute bg-white w-full left-0 bottom-[-135px]'>
+                  <DateRange
+                    editableDateInputs={true}
+                    onChange={item => setState([item.selection])}
+                    moveRangeOnFirstSelection={false}
+                    ranges={state}
+                  />
+                </div>
+                )
+              }
+              </div>
+            </div>
+            <div className='flex border-l-[1px] max-sm:border-l-0 cursor-pointer max-sm:border-t-[1px] max-sm:border-[#fcb900] border-[#fcb900] flex-1 justify-between px-4 py-3'>
+              <p className='text-white text-[14px]'>Check Out</p>
+              <p className='text-white text-[14px]'>{state[0].endDate ? format(state[0].endDate, 'yyyy-MM-dd') : ''}</p>
+            </div>
+          </div>
+          <div className='flex flex-row w-full max-sm:flex-col'>
+            <div onClick={() => setOpen(open === "people" ? "" : "people")} className='flex border-l-[1px] max-sm:border-t-[1px] max-sm:border-[#fcb900] cursor-pointer border-[#fcb900] max-sm:border-l-0 flex-1 justify-between px-4 py-3 relative'>
+              <p>Guest</p>
+              <div className='flex items-center gap-2'>
+                <p>Adults,0</p>
+                <p>Child,0</p>
+              </div>
+              {
+                open === "people" && (
+                  <div onClick={(e) => {
+                    e.stopPropagation();
+                  }} className='absolute bg-white w-full left-0 bottom-[-135px]'>
+                  <div className='flex justify-between text-black p-5 items-center'>
+                    <p>Adults</p>
+                    <div className='flex gap-3 items-center'>
+                      <button className='cursor-pointer'>-</button>
+                      <p>0</p>
+                      <button className='cursor-pointer'>+</button>
+                    </div>
+                  </div>
+                  <div className='flex justify-between text-black p-5 items-center'>
+                    <p>Children</p>
+                    <div className='flex gap-3 items-center'>
+                      <button className='cursor-pointer'>-</button>
+                      <p>0</p>
+                      <button className='cursor-pointer'>+</button>
+                    </div>
+                  </div>
+                </div>
+                )
+              }
+            </div>
+            <div className='flex border-l-[1px] border-[#fcb900] flex-1 justify-center items-center max-sm:border-t-[1px] max-sm:px-4 max-sm:py-3 max-sm:border-[#fcb900] max-sm:border-l-0'>
+              <button className='cursor-pointer'>Check Availability</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div className='max-w-[1200px] m-auto flex flex-col gap-8 max-sm:gap-4'>
-      <p className='text-[#b99d75] uppercase text-[12px] font-[600] max-sm:mx-10 text-center'>Welcome to Omenma Hotels</p>
+      <p className='text-[#b99d75] mt-5 uppercase text-[12px] font-[600] max-sm:mx-10 text-center'>Welcome to Omenma Hotels</p>
       <h1 className='text-[#ffffff] text-[35px] font-[600] max-sm:text-[18px] text-center max-sm:mx-5'>Explore our refined accommodation options <br /> and find the perfect space for your stay.</h1>
       <p className='text-[#cfcece] max-sm:mx-5 max-sm:text-[15px] text-[17px] text-center'>All rooms have a cozy, ultra clean bed and beddings, bathroom and shower, cable television,<br /> free WIFI and executive seat.</p>
       <div className='flex items-center justify-center gap-3 max-sm:mx-5 max-sm:gap-2 max-sm:flex-wrap max-sm:text-[16px]'>
-        <button onClick={() => setMenu("Executive")} className='uppercase text-[15px] cursor-pointer text-[#FFFFFF] max-sm:text-[13px] font-[600]'>Executive Rooms</button>
-        <button onClick={() => setMenu("Deluxe")} className='uppercase max-sm:text-[13px] text-[15px] text-[#FFFFFF] font-[600] cursor-pointer'>Deluxe Rooms</button>
-        <button onClick={() => setMenu("Standard")} className='uppercase max-sm:text-[13px] text-[15px] text-[#FFFFFF] cursor-pointer font-[600]'>standard Rooms</button>
-        <button onClick={() => setMenu("Royal")} className='uppercase max-sm:text-[13px] text-[15px] text-[#FFFFFF] cursor-pointer font-[600]'>royal Rooms</button>
-        <button onClick={() => setMenu("Event")} className='uppercase max-sm:text-[13px] text-[15px] text-[#FFFFFF] cursor-pointer font-[600]'>Event center</button>
+        <button onClick={() => setMenu("Executive")}  className={`uppercase max-sm:text-[13px] text-[15px] font-[600] cursor-pointer ${
+          menu === "Executive" ? 'text-[#FFCC00]' : 'text-[#FFFFFF]'
+        }`}>Executive Rooms</button>
+        <button onClick={() => setMenu("Deluxe")}  className={`uppercase max-sm:text-[13px] text-[15px] font-[600] cursor-pointer ${
+          menu === "Deluxe" ? 'text-[#FFCC00]' : 'text-[#FFFFFF]'
+        }`}>Deluxe Rooms</button>
+        <button onClick={() => setMenu("Standard")}  className={`uppercase max-sm:text-[13px] text-[15px] font-[600] cursor-pointer ${
+          menu === "Standard" ? 'text-[#FFCC00]' : 'text-[#FFFFFF]'
+        }`}>standard Rooms</button>
+        <button onClick={() => setMenu("Royal")} className={`uppercase max-sm:text-[13px] text-[15px] font-[600] cursor-pointer ${
+          menu === "Royal" ? 'text-[#FFCC00]' : 'text-[#FFFFFF]'
+        }`}>royal Rooms</button>
+        <button onClick={() => setMenu("Event")}  className={`uppercase max-sm:text-[13px] text-[15px] font-[600] cursor-pointer ${
+          menu === "Event" ? 'text-[#FFCC00]' : 'text-[#FFFFFF]'
+        }`}>Event center</button>
       </div>
       <div className=''>
         {

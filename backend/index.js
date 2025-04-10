@@ -3,7 +3,8 @@ import express from "express"
 import cors from "cors"
 import { db } from "./components/database.js"
 import dotenv from "dotenv"
-import authRoute from "./route/auth.js"
+import authRoute from "./route/auth.route.js"
+import roomRoute from "./route/room.route.js"
 import cookiSession from "cookie-session"
 import passportSetup from "./components/passport.js"
 import passport from "passport"
@@ -27,12 +28,16 @@ app.use(
     /*secure: process.env.NODE_ENV === "production",
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",*/
   }
-  ))
+))
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('/auth/google', 
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
 
 app.use("/api/auth", authRoute)
+app.use("/api/room", roomRoute)
 
 app.get("/", (req, res) => {
   res.send("Api is working")
