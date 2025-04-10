@@ -47,7 +47,7 @@ const HeroPage = () => {
               }
               </div>
             </div>
-            <div className='flex border-l-[1px] cursor-pointer max-sm:border-t-[1px] max-sm:border-[#fcb900] border-[#fcb900] flex-1 justify-between px-4 py-3'>
+            <div className='flex border-l-[1px] max-sm:border-l-0 cursor-pointer max-sm:border-t-[1px] max-sm:border-[#fcb900] border-[#fcb900] flex-1 justify-between px-4 py-3'>
               <p className='text-white text-[14px]'>Check Out</p>
               <p className='text-white text-[14px]'>{state[0].endDate ? format(state[0].endDate, 'yyyy-MM-dd') : ''}</p>
             </div>
@@ -84,7 +84,7 @@ const HeroPage = () => {
                 )
               }
             </div>
-            <div className='flex border-l-[1px] border-[#fcb900] flex-1 justify-center items-center max-sm:border-t-[1px] max-sm:px-4 max-sm:py-3 max-sm:border-[#fcb900] max-sm:border-l-0 max-sm:border-l-0'>
+            <div className='flex border-l-[1px] border-[#fcb900] flex-1 justify-center items-center max-sm:border-t-[1px] max-sm:px-4 max-sm:py-3 max-sm:border-[#fcb900] max-sm:border-l-0'>
               <button className='cursor-pointer'>Check Availability</button>
             </div>
           </div>
