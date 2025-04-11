@@ -1,7 +1,13 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 import { data } from '../utils/dummyData'
+import AOS from "aos"
 
 const Rooms = () => {
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
   return (
     <div className='max-w-[1100px] m-auto flex flex-col gap-3'>
       <p className='text-[#b99d75] uppercase mt-4 text-[12px] font-[600] text-center'>Extraordinary Accommodations</p>
@@ -10,7 +16,7 @@ const Rooms = () => {
         {
           data.slice(0,3).map((room) => {
             return (
-              <div key={room.id} className='flex flex-col relative'>
+              <div data-aos="fade-right" key={room.id} className='flex flex-col relative'>
                 <div className='overflow-hidden'>
                   <img
                     className="w-full h-[450px] object-cover cursor-pointer transition-transform duration-300 ease hover:scale-[1.06]"

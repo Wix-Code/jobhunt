@@ -10,6 +10,9 @@ const roomSchema = new mongoose.Schema({
   price: {
     type: Number, required: true
   },
+  breakfastPrice: {
+    type: Number, required: true
+  },
   img: {
     type: Array, required: true
   },
