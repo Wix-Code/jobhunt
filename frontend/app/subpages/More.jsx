@@ -24,7 +24,7 @@ const More = () => {
           <div className='bg-[#000] flex-1'>
             <div className='flex flex-col justify-between m-20 gap-4  max-sm:m-5 max-sm:gap-1'>
               <p className='text-[#b99d75] uppercase text-[12px] font-[600]'>I bu onye oriri</p>
-              <h1 className='text-[#FFFFFF] text-[34px]'>Restaurant & Bars</h1>
+              <h1 className='text-[#FFFFFF] text-[34px] max-sm:text-[22px]'>Restaurant & Bars</h1>
               <p className='text-[#cfcece] text-[17px]'>Have you tried the famous Omenma Nigerian Jollof Rice? What of Ofe Owerri, Ofe Egusi or Ofe Akwu? Maybe, you prefer an English breakfast of Chips and Fish with cup of tea? Our intercontinental chef got your culinary needs covered.</p>
               <button className='text-[#FFFFFF] border-[1px] w-fit border-[#b99d75] px-12 py-3 cursor-pointer'>Discover More</button>
            </div>
@@ -34,7 +34,7 @@ const More = () => {
           <div className='bg-[#000] flex-1'>
             <div className='flex flex-col justify-between m-20 max-sm:m-5 gap-8 max-sm:gap-2'>
               <p className='text-[#b99d75] uppercase text-[12px] font-[600]'>I bu onye oriri</p>
-              <h1 className='text-[#FFFFFF] text-[34px]'>Restaurant & Bars</h1>
+              <h1 className='text-[#FFFFFF] text-[34px] max-sm:text-[22px]'>Restaurant & Bars</h1>
               <p className='text-[#cfcece] text-[17px]'>Have you tried the famous Omenma Nigerian Jollof Rice? What of Ofe Owerri, Ofe Egusi or Ofe Akwu? Maybe, you prefer an English breakfast of Chips and Fish with cup of tea? Our intercontinental chef got your culinary needs covered.</p>
            </div>
           </div>
