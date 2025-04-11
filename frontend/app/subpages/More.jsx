@@ -6,7 +6,7 @@ import "aos/dist/aos.css";
 const More = () => {
   useEffect(() => {
     AOS.init({
-      duration: 2000,
+      duration: 1000,
       easing: 'ease-in-out',
       delay: 100,
       once: true, // whether animation should happen only once - while scrolling down

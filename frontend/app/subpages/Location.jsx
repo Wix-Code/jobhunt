@@ -8,7 +8,7 @@ const Location = () => {
     AOS.refresh();
   }, []);
 return (
-    <div className='max-w-[1200px] m-auto flex flex-row max-sm:flex-col overflow-hidden'>
+    <div className='max-w-[1200px] m-auto flex flex-row max-sm:flex-col overflow-hidden py-10'>
       <div data-aos="fade-right" className='flex-1 relative h-[500px] max-sm:w-full'>
         <img className='w-full h-[500px]' src="https://omenmahotels.com/wp-content/uploads/2024/03/pexels-chait-goli-7353487-1-1200x1500.jpg.webp" alt="" />
         <div className='absolute top-0 p-5 m-20 flex items-center justify-between flex-col left-0 right-0 bottom-0 bg-[#00000098] max-sm:m-6 max-sm:justify-center max-sm:gap-8'>

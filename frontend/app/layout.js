@@ -1,6 +1,8 @@
 import { Roboto, Marcellus } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "./components/Navbar";
+import Footer from "./subpages/Footer";
+import ScrollToTop from "./subpages/ScrollToTop";
 
 // Load fonts
 const roboto = Roboto({
@@ -23,9 +25,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} ${marcellus.className}`}>
+      <body className={` relative ${roboto.className} ${marcellus.className}`}>
         <Navbar />
         {children}
+        <ScrollToTop />
+        <Footer />
       </body>
     </html>
   );
