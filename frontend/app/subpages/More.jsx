@@ -26,7 +26,7 @@ const More = () => {
               <p className='text-[#b99d75] uppercase text-[12px] font-[600]'>I bu onye oriri</p>
               <h1 className='text-[#FFFFFF] text-[34px]'>Restaurant & Bars</h1>
               <p className='text-[#cfcece] text-[17px]'>Have you tried the famous Omenma Nigerian Jollof Rice? What of Ofe Owerri, Ofe Egusi or Ofe Akwu? Maybe, you prefer an English breakfast of Chips and Fish with cup of tea? Our intercontinental chef got your culinary needs covered.</p>
-              <button>Discover more</button>
+              <button className='text-[#FFFFFF] border-[1px] w-fit border-[#b99d75] px-12 py-3 cursor-pointer'>Discover More</button>
            </div>
           </div>
         </div>
