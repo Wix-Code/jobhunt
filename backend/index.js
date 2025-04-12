@@ -4,6 +4,7 @@ import cors from "cors"
 import { db } from "./components/database.js"
 import dotenv from "dotenv"
 import authRoute from "./route/auth.route.js"
+import bookRoute from "./route/booking.route.js"
 import roomRoute from "./route/room.route.js"
 import cookiSession from "cookie-session"
 import passportSetup from "./components/passport.js"
@@ -38,6 +39,7 @@ app.get('/auth/google',
 
 app.use("/api/auth", authRoute)
 app.use("/api/room", roomRoute)
+app.use("/api/book", bookRoute)
 
 app.get("/", (req, res) => {
   res.send("Api is working")

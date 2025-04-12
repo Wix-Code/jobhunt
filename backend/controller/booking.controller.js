@@ -1,5 +1,5 @@
-import Booking from "../model/booking.model";
-import Room from "../model/room.model";
+import Booking from "../model/booking.model.js";
+import Room from "../model/room.model.js";
 
 export const bookRoom = async (req, res) => {
   const { roomId, userId, checkIn, checkOut, rooms, adults, children, breakfast } = req.body
@@ -23,7 +23,7 @@ export const bookRoom = async (req, res) => {
     if (breakfast) {
       totalPrice += room.breakfastPrice * nights * rooms;
     }
-    
+
     const bookRoom = new Booking({
       roomId, userId, checkIn, checkOut, rooms, adults, children, breakfast
     })
