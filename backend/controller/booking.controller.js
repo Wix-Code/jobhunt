@@ -74,3 +74,51 @@ export const bookRoom = async (req, res) => {
     });
   }
 };
+
+export const getBooking = async (req, res) => { 
+  const { userId } = req.body;
+  try {
+    const bookings = await Booking.find({ userId }).populate("roomId").lean();
+    if (!bookings) {
+      return res.status(404).json({ success: false, message: "No bookings found" });
+    }
+    return res.status(200).json({ success: true, bookings });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: "Failed to fetch bookings" });
+  }
+}
+
+export const deleteBooking = async (req, res) => { 
+  const { id } = req.params;
+  const { userId } = req.body;
+  if (!userId) {
+    return res.status(400).json({ success: false, message: "User ID is required" });
+  }
+  if (!id) {
+    return res.status(400).json({ success: false, message: "Booking ID is required" });
+  }
+  try {
+    const booking = await Booking.findByIdAndDelete(id);
+    if (!booking) {
+      return res.status(404).json({ success: false, message: "Booking not found" });
+    }
+    return res.status(200).json({ success: true, message: "Booking deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: "Failed to delete booking" });
+  }
+}
+
+export const getAllBookings = async (req, res) => { 
+  try {
+    const bookings = await Booking.find({}).populate("roomId").lean();
+    if (!bookings) {
+      return res.status(404).json({ success: false, message: "No bookings found" });
+    }
+    return res.status(200).json({ success: true, bookings });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: "Failed to fetch bookings" });
+  }
+}
