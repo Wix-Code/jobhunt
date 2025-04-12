@@ -1,5 +1,7 @@
 import Booking from "../model/booking.model.js";
+import Order from "../model/order.model.js";
 import Room from "../model/room.model.js";
+import { paystack } from "../components/payStack.js";
 
 export const bookRoom = async (req, res) => {
   const {
@@ -120,5 +122,162 @@ export const getAllBookings = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({ success: false, message: "Failed to fetch bookings" });
+  }
+}
+
+export const getBookingById = async (req, res) => {
+const { id } = req.params;
+  try {
+    const booking = await Booking.findById(id).populate("roomId").lean();
+    if (!booking) {
+      return res.status(404).json({ success: false, message: "Booking not found" });
+    }
+    return res.status(200).json({ success: true, booking });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: "Failed to fetch booking" });
+  }
+}
+
+export const checkOutDetails = async (req, res) => { 
+  const { userId, bookingId, fname, lname, phoneNo, email, address, code, amount } = req.body;
+  if (!userId) {
+    return res.status(400).json({ success: false, message: "User ID is required" });
+  }
+  if (!bookingId) {
+    return res.status(400).json({ success: false, message: "Booking ID is required" });
+  }
+  try {
+    const booking = await Booking.findById(bookingId).populate("roomId").lean();
+    if (!booking) {
+      return res.status(404).json({ success: false, message: "Booking not found" });
+    }
+    const getAmount = booking.totalPrice;
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let genCode = '';
+    for (let i = 0; i < 10; i++) {
+      genCode += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    
+    //const { roomId, checkIn, checkOut, rooms, adults, children, breakfast, totalPrice } = booking;
+    const order = new Order({
+      bookingId,
+      userId,
+      fname,
+      lname,
+      phoneNo,
+      email,
+      address,
+      amount: getAmount,
+      code: genCode,
+    });
+    await order.save();
+
+    return res.status(200).json({
+      success: true,
+     /* bookingDetails: {
+        roomId,
+        checkIn,
+        checkOut,
+        rooms,
+        adults,
+        children,
+        breakfast,
+        totalPrice,
+        fname,
+        lname,
+        phoneNo,
+        email,
+        address,
+        code: genCode,
+      },*/
+      order
+    });
+    
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: "Failed to post checkout details", error: error.message });
+  }
+}
+
+const url = "http://localhost:3000";
+export const makePayment = async (req, res) => { 
+  const { userId, orderId, } = req.body;
+  if (!userId) {
+    return res.status(400).json({ success: false, message: "User ID is required" });
+  }
+  if (!orderId) {
+    return res.status(400).json({ success: false, message: "Order ID is required" });
+  }
+  try {
+    const order = await Order.findById(orderId).populate("bookingId").lean();
+    if (!order) {
+      return res.status(404).json({ success: false, message: "Order not found" });
+    }
+
+    const response = await paystack.transaction.initialize({
+      email: order.email,
+      amount: Math.round(order.amount * 100), // Paystack requires the amount in kobo
+      currency: "NGN",
+      callback_url: `${url}/verify?orderId=${orderId}`,
+    });
+
+    if (response.status) {
+      return res.status(200).json({
+        success: true,
+        message: "Payment initialized successfully",
+        authorization_url: response.data.authorization_url,
+        response
+      });
+    } else {
+      return res.status(400).json({ success: false, message: "Failed to initialize payment" });
+    }
+    
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: "Failed to make payment" });
+  }
+}
+
+export const verifyPayment = async (req, res) => { 
+  const { orderId } = req.query;
+  if (!orderId) {
+    return res.status(400).json({ success: false, message: "Order ID is required" });
+  }
+  try {
+    const order = await Order.findById(orderId).populate("bookingId").lean();
+    if (!order) {
+      return res.status(404).json({ success: false, message: "Order not found" });
+    }
+
+    const response = await paystack.transaction.verify({ reference: order.code });
+
+    if (response.status) {
+      return res.status(200).json({
+        success: true,
+        message: "Payment verified successfully",
+        response
+      });
+    } else {
+      return res.status(400).json({ success: false, message: "Failed to verify payment" });
+    }
+    
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: "Failed to verify payment" });
+  }
+}
+
+export const getOrder = async (req, res) => { 
+  const { userId } = req.body;
+  try {
+    const orders = await Order.find({ userId }).populate("bookingId").lean();
+    if (!orders) {
+      return res.status(404).json({ success: false, message: "No orders found" });
+    }
+    return res.status(200).json({ success: true, orders });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: "Failed to fetch orders" });
   }
 }

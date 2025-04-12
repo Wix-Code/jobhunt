@@ -23,6 +23,7 @@
     "nodemon": "^3.1.9",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
+    "paystack-sdk": "^2.5.19",
     "validator": "^13.15.0"
   }
 }
