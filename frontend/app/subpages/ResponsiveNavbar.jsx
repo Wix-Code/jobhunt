@@ -20,10 +20,10 @@ const ResponsiveNavbar = ({ setOpenNav }) => {
       </div>
       <div>
         <div className='flex items-center justify-center py-5 border-b-[1px] border-[#b99d75] bg-[#151719]'>
-          <p onClick={() => setOpenNav(false)}  className='text-[18px] text-white capitalize hover:text-[#b99d75] cursor-pointer'>Login</p>
+          <Link href="/login"><p onClick={() => setOpenNav(false)}  className='text-[18px] text-white capitalize hover:text-[#b99d75] cursor-pointer'>Login</p></Link>
         </div>
         <div className='flex items-center justify-center py-5 border-b-[1px] border-[#b99d75] bg-[#151719]'>
-          <p onClick={() => setOpenNav(false)}  className='text-[18px] text-white capitalize hover:text-[#b99d75] cursor-pointer'>Register</p>
+          <Link href='/register'><p onClick={() => setOpenNav(false)}  className='text-[18px] text-white capitalize hover:text-[#b99d75] cursor-pointer'>Register</p></Link>
         </div>
       </div>
     </div>
