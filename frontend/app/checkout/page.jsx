@@ -3,7 +3,7 @@ import React from 'react'
 const page = () => {
   return (
     <div className=' bg-[#151719]'>
-      <div className='flex max-sm:flex-col gap-10 flex-row max-w-[1200px] m-auto max-sm:px-5 bg-[#151719]'>
+      <div className='flex max-sm:flex-col gap-20 flex-row max-w-[1100px] m-auto max-sm:px-5 bg-[#151719]'>
         <div className='flex flex-col max-sm:mt-5 max-sm:w-full max-sm:p-0  p-6 w-[60%]' style={{ boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px" }}>
         <h1 className='text-white mb-5 text-[32px] max-sm:text-[24px] font-[800]'>Billing Details</h1>
           <form action="" method="post">
@@ -31,10 +31,11 @@ const page = () => {
             </div>
           </form>
         </div>
-        <div className='w-[40%] max-sm:mb-5 max-sm:w-full'>
-          <div className='bg-[#000] p-6'>
+        <div className='w-[40%] max-sm:mb-5 max-sm:w-full mt-5'>
+          <div className='bg-[#000] p-6 flex flex-col gap-5'>
             <h1 className='text-white text-[32px] max-sm:text-[24px] font-[800]'>Your Order</h1>
-            <button type="submit" className='bg-[#ffffff] hover:bg-[#b99d75] cursor-pointer text-wgray-300 hover:text-white py-4'>Pay Now</button>
+            <img src="https://omenmahotels.com/wp-content/plugins/woo-paystack/assets/images/paystack-wc.png" alt="" />
+            <button type="submit" className='bg-[#ffffff] w-full hover:bg-[#b99d75] hover:hover:bg-[#b99d75] cursor-pointer text-wgray-300 max-sm:hover:text-white hover:text-white py-4'>Pay Now</button>
           </div>
         </div>
       </div>
