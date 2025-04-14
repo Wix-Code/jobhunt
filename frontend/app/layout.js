@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navbar } from "./components/Navbar";
 import Footer from "./subpages/Footer";
 import ScrollToTop from "./subpages/ScrollToTop";
+import { ToastContainer } from "react-toastify";
 
 // Load fonts
 const roboto = Roboto({
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={` relative ${roboto.className} ${marcellus.className}`}>
+        <ToastContainer />
         <Navbar />
         {children}
         <ScrollToTop />
