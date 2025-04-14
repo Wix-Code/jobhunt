@@ -1,15 +1,33 @@
+"use client"
 import React from 'react'
 
 const page = () => {
+  const [userData, setUserData] = React.useState({
+    username: "",
+    email: "",
+    password: ""
+  })
+
+  const handleChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = (e) => { 
+    e.preventDefault()
+    console.log(userData)
+  }
   return (
     <div className='flex flex-col items-center justify-center h-screen max-sm:px-10 bg-[#151719]'>
       <div className='flex flex-col w-[500px] max-sm:w-full max-sm:mx-10 p-6 bg-white' style={{boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px"}}>
         <form action="" method="post">
           <div className='flex flex-col gap-5 w-full'>
-            <input type="text" placeholder='Username' required className='border-[1px] border-[#b99d75] bg-white p-3 outline-hidden w-full rounded-md' />
-            <input type="email" placeholder='Email' required className='border-[1px] border-[#b99d75] outline-hidden p-3 rounded-md' />
-            <input type="password" placeholder='Password' required className='border-[1px] border-[#b99d75] p-3 outline-hidden rounded-md' />
-            <button type="submit" className='bg-[#b99d75] text-white py-3 rounded-md'>Register</button>
+            <input onChange={handleChange} name='username' type="text" placeholder='Username' required className='border-[1px] border-[#b99d75] bg-white p-3 outline-hidden w-full rounded-md' />
+            <input onChange={handleChange} name='email' type="email" placeholder='Email' required className='border-[1px] border-[#b99d75] outline-hidden p-3 rounded-md' />
+            <input onChange={handleChange} name='password' type="password" placeholder='Password' required className='border-[1px] border-[#b99d75] p-3 outline-hidden rounded-md' />
+            <button onClick={handleSubmit} type="submit" className='bg-[#b99d75] text-white py-3 rounded-md'>Register</button>
             <div className='flex justify-center items-center gap-3'>
               <button className='cursor-pointer'><img className='w-[50px]' src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="" /></button>
             </div>
