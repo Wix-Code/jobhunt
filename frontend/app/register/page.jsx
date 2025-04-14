@@ -15,9 +15,22 @@ const page = () => {
     })
   }
 
-  const handleSubmit = (e) => { 
+  const handleSubmit = async (e) => { 
     e.preventDefault()
     console.log(userData)
+    try {
+      const response = await fetch("http://localhost:8800/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)
+      })
+      const data = await response.json()
+      console.log(data, "APi")
+    } catch (error) {
+      console.log(error)
+    }
   }
   return (
     <div className='flex flex-col items-center justify-center h-screen max-sm:px-10 bg-[#151719]'>
