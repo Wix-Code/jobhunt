@@ -10,6 +10,9 @@ import Slider from 'react-slick';
 const details = () => {
   const [open, setOpen] = useState("");
   const [button, setButton] = useState(0)
+  const [adults, setAdults] = useState(1)
+  const [children, setChildren] = useState(0)
+  const [rooms, setRooms] = useState(0)
   const img = [
     "https://www.image.direvhotel.com/14075/1711620359ClassicSuite.jpeg",
     "https://www.image.direvhotel.com/14075/1711620250ExecutiveRoomBedroom-min.jpg",
@@ -112,9 +115,9 @@ const details = () => {
                   <div className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
                     <p>Rooms</p>
                     <div className='flex items-center gap-3'>
-                      <p>-</p>
-                      <p>0</p>
-                      <p>+</p>
+                      <button disabled={rooms === 0} onClick={() => setRooms (prev => prev - 1)}>-</button>
+                      <p>{rooms}</p>
+                      <button onClick={() => setRooms (prev => prev + 1)}>+</button>
                     </div>
                   </div>
                 )
@@ -126,11 +129,11 @@ const details = () => {
               {
                 open === "check" && (
                   <div className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
-                    <p>Rooms</p>
+                    <p>Adults</p>
                     <div className='flex items-center gap-3'>
-                      <p>-</p>
-                      <p>0</p>
-                      <p>+</p>
+                      <button disabled={adults === 1} onClick={() => setAdults (prev => prev - 1)}>-</button>
+                      <p>{adults}</p>
+                      <button onClick={() => setAdults (prev => prev + 1)}>+</button>
                     </div>
                   </div>
                 )
@@ -138,15 +141,17 @@ const details = () => {
             </div>
             <div onClick={() => setOpen(open === "room" ? "" : "room")} className='relative flex justify-between p-3 cursor-pointer border-[1px] border-[rgb(185,157,117)] text-white'>
               <p>Rooms</p>               
-              <p>0</p>
+              <p>{rooms}</p>
               {
                 open === "room" && (
-                  <div className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
-                    <p>Rooms</p>
+                  <div onClick={(e) => {
+                    e.stopPropagation();
+                  }} className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
+                    <p>Children</p>
                     <div className='flex items-center gap-3'>
-                      <p>-</p>
-                      <p>0</p>
-                      <p>+</p>
+                      <button disabled={rooms === 0} onClick={() => setRooms (prev => prev - 1)}>-</button>
+                      <p>{children}</p>
+                      <button onClick={() => setRooms (prev => prev + 1)}>+</button>
                     </div>
                   </div>
                 )
@@ -155,29 +160,33 @@ const details = () => {
             <div className='flex gap-3'>
               <div onClick={() => setOpen(open === "adullts" ? "" : "adults")} className='cursor-pointer relative flex justify-between p-3 border-[1px] border-[rgb(185,157,117)] text-white w-full'>
                 <p>Adults</p>               
-                <p>0</p>
+                <p>{adults}</p>
                 {
-                  open === "adults" && (<div className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
+                  open === "adults" && (<div onClick={(e) => {
+                    e.stopPropagation();
+                  }} className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
                     <p>Adults</p>
                     <div className='flex items-center gap-3'>
-                      <p>-</p>
-                      <p>0</p>
-                      <p>+</p>
+                      <p disabled={adults === 1} onClick={()=>setAdults(prev => prev - 1)}>-</p>
+                      <p>{adults}</p>
+                      <p onClick={()=>setAdults(prev => prev + 1)}>+</p>
                     </div>
                   </div>)
                 }
               </div>
               <div onClick={() => setOpen(open === "children" ? "" : "children")}  className='relative cursor-pointer flex justify-between p-3 border-[1px] border-[rgb(185,157,117)] text-white w-full'>
                 <p>Children</p>               
-                <p>0</p>
+                <p>{children}</p>
                 {
                   open === "children" && (
-                    <div className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
+                    <div onClick={(e) => {
+                      e.stopPropagation();
+                    }} className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
                      <p>Children</p>
                       <div className='flex items-center gap-3'>
-                        <p>-</p>
-                        <p>0</p>
-                        <p>+</p>
+                        <p disabled={children === 0} onClick={()=>setChildren(prev => prev - 1)}>-</p>
+                        <p>{children}</p>
+                        <p onClick={()=>setChildren(prev => prev + 1)}>+</p>
                       </div>
                     </div>
                   )

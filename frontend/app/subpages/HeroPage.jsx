@@ -8,6 +8,8 @@ import { addDays, format } from 'date-fns';
 const HeroPage = () => {
   format(new Date(2014, 1, 11), "yyyy-MM-dd");
   const [open, setOpen] = useState("")
+  const [adults, setAdults] = useState(1)
+  const [children, setChildren] = useState(0)
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -56,8 +58,8 @@ const HeroPage = () => {
             <div onClick={() => setOpen(open === "people" ? "" : "people")} className='flex border-l-[1px] max-sm:border-t-[1px] max-sm:border-[#fcb900] cursor-pointer border-[#fcb900] max-sm:border-l-0 flex-1 justify-between px-4 py-3 relative'>
               <p>Guest</p>
               <div className='flex items-center gap-2'>
-                <p>Adults,0</p>
-                <p>Child,0</p>
+                <p>Adults,{adults}</p>
+                <p>Child,{children}</p>
               </div>
               {
                 open === "people" && (
@@ -67,17 +69,17 @@ const HeroPage = () => {
                   <div className='flex justify-between text-black p-5 items-center'>
                     <p>Adults</p>
                     <div className='flex gap-3 items-center'>
-                      <button className='cursor-pointer'>-</button>
-                      <p>0</p>
-                      <button className='cursor-pointer'>+</button>
+                      <button disabled={adults === 1} onClick={() => setAdults(prev => prev - 1)} className='cursor-pointer'>-</button>
+                        <p>{ adults}</p>
+                      <button onClick={() => setAdults(prev => prev + 1)} className='cursor-pointer'>+</button>
                     </div>
                   </div>
                   <div className='flex justify-between text-black p-5 items-center'>
                     <p>Children</p>
                     <div className='flex gap-3 items-center'>
-                      <button className='cursor-pointer'>-</button>
-                      <p>0</p>
-                      <button className='cursor-pointer'>+</button>
+                      <button disabled={children === 0} onClick={() => setChildren(prev => prev - 1)} className='cursor-pointer'>-</button>
+                        <p>{children}</p>
+                      <button onClick={() => setChildren(prev => prev + 1)} className='cursor-pointer'>+</button>
                     </div>
                   </div>
                 </div>
