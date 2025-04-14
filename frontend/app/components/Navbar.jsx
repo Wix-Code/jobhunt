@@ -36,8 +36,8 @@ export const Navbar = () => {
           }
        </div>
         <div className='flex items-center justify-between flex-row gap-3 max-sm:hidden'>
-          <p className='text-[18px] text-white capitalize hover:text-[#b99d75] cursor-pointer'>Login</p>
-          <p className='text-[18px] text-white capitalize hover:text-[#b99d75] cursor-pointer'>Register</p>
+          <Link href="/login"><p className='text-[18px] text-white capitalize hover:text-[#b99d75] cursor-pointer'>Login</p></Link>
+          <Link href="/register"><p className='text-[18px] text-white capitalize hover:text-[#b99d75] cursor-pointer'>Register</p></Link>
         </div>
         <button onClick={() => setOpenNav(!openNav)} className='hidden max-sm:flex text-[20px] text-white mr-5'><FaBars /></button>
       </div>

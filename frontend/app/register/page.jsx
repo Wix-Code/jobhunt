@@ -1,7 +1,8 @@
 "use client"
-import React from 'react'
+import React, {useState} from 'react'
 
 const page = () => {
+  const [loading, setLoading] = useState(false)
   const [userData, setUserData] = React.useState({
     username: "",
     email: "",
@@ -18,6 +19,7 @@ const page = () => {
   const handleSubmit = async (e) => { 
     e.preventDefault()
     console.log(userData)
+    setLoading(true)
     try {
       const response = await fetch("http://localhost:8800/api/auth/register", {
         method: "POST",
@@ -28,6 +30,13 @@ const page = () => {
       })
       const data = await response.json()
       console.log(data, "APi")
+      if (data.success) {
+        alert("Registration successful")
+        window.location.href = "/login"
+      } else {
+        alert(data.message)
+      }
+      setLoading(false)
     } catch (error) {
       console.log(error)
     }
