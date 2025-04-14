@@ -1,10 +1,13 @@
 "use client"
 import Location from '@/app/subpages/Location';
 import React, { useState } from 'react'
-import { FaToiletPaper, FaWifi } from 'react-icons/fa6';
+import { FaToiletPaper, FaTv, FaWifi } from 'react-icons/fa6';
 import { IoBedOutline } from "react-icons/io5";
 import { TbAirConditioning } from 'react-icons/tb';
+import { CiLight } from "react-icons/ci";
 import { GrPrevious, GrNext } from "react-icons/gr";
+import { LuShoppingCart } from "react-icons/lu";
+import { MdOutlineLocalLaundryService } from "react-icons/md";
 import Slider from 'react-slick';
 
 const details = () => {
@@ -67,35 +70,35 @@ const details = () => {
           <p className='text-[28px] mt-10'>Room Amenities</p>
           <div className='grid grid-cols-2 gap-5 max-sm:grid-cols-1'>
             <div className='flex items-center gap-3'>
-              <IoBedOutline className='text-[50px] text-[#cfcece]' />
+              <CiLight className='text-[45px] text-[#cfcece]' />
               <p className='text-[18px]'>24/7 Light</p>
             </div>
             <div className='flex items-center gap-3'>
-              <TbAirConditioning className='text-[50px] text-[#cfcece]' />
+              <TbAirConditioning className='text-[45px] text-[#cfcece]' />
               <p className='text-[18px]'>Air Conditioner</p>
             </div>
             <div className='flex items-center gap-3'>
-              <IoBedOutline className='text-[50px] text-[#cfcece]' />
+              <LuShoppingCart className='text-[45px] text-[#cfcece]' />
               <p className='text-[18px]'>In-hotel Supermaket</p>
             </div>
             <div className='flex items-center gap-3'>
-              <IoBedOutline className='text-[50px] text-[#cfcece]' />
+              <IoBedOutline className='text-[45px] text-[#cfcece]' />
               <p className='text-[18px]'>Room Services</p>
             </div>
             <div className='flex items-center gap-3'>
-              <IoBedOutline className='text-[50px] text-[#cfcece]' />
+              <MdOutlineLocalLaundryService className='text-[45px] text-[#cfcece]' />
               <p className='text-[18px]'>Laundry Services</p>
             </div>
             <div className='flex items-center gap-3'>
-              <IoBedOutline className='text-[50px] text-[#cfcece]' />
+              <FaTv className='text-[45px] text-[#cfcece]' />
               <p className='text-[18px]'>Cable TV</p>
             </div>
             <div className='flex items-center gap-3'>
-              <FaWifi className='text-[50px] text-[#cfcece]' />
+              <FaWifi className='text-[45px] text-[#cfcece]' />
               <p className='text-[18px]'>Free Wifi & Internet</p>
             </div>
             <div className='flex items-center gap-3'>
-              <FaToiletPaper className='text-[50px] text-[#cfcece]' />
+              <FaToiletPaper className='text-[45px] text-[#cfcece]' />
               <p className='text-[18px]'>Towels/Toiletries</p>
             </div>
           </div>
