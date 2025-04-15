@@ -10,11 +10,13 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DateRange, DateRangePicker } from 'react-date-range';
 import { addDays, format } from 'date-fns';
+import { useStore } from '../context/StoreContext';
 
 const FindPage = () => {
   const [menu, setMenu] = useState("Executive")
   format(new Date(2014, 1, 11), "yyyy-MM-dd");
   const [open, setOpen] = useState("")
+  const { apiData } = useStore();
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -156,7 +158,7 @@ const FindPage = () => {
       </div>
       <div className=''>
         {
-          data.filter((room) => room.filter === menu).map((rooms) => {
+          apiData?.filter((room) => room.filter === menu).map((rooms) => {
             return (
                 <div key={rooms.id} className='flex max-sm:flex max-sm:flex-col items-center flex-row gap-20 max-sm:mx-5 max-sm:gap-5'>
                   <div className='flex-1 max-sm:w-full'>

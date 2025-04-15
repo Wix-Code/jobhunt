@@ -1,6 +1,6 @@
 "use client"
 
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { data } from '../utils/dummyData'
 import { toast } from 'react-toastify'
 
@@ -11,6 +11,7 @@ export const StoreContext = ({ children }) => {
     password: ""
   })
   const [loading, setLoading] = useState(false)
+  const [apidata, setApiData] = useState([])
 
   const handleChange = async (e) => {
     const { name, value } = e.target
@@ -54,14 +55,46 @@ export const StoreContext = ({ children }) => {
       setLoading(false);
     }
   };
-  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("http://localhost:8800/api/room", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const data = await res.json();
+        console.log(data, "Response");
+
+        setApiData(data?.rooms || []);
+      } catch (error) {
+        console.error("Error fetching rooms:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    console.log(apidata, "Data");
+  }, [apidata]); // log when apiData changes
+
   return (
     <storeContext.Provider value={{
       userData,
       setUserData,
       loading,
       handleChange,
-      handleSubmit
+      handleSubmit,
+      data
     }}>
       {children}
     </storeContext.Provider>
