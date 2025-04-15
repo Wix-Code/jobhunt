@@ -1,5 +1,6 @@
 "use client"
 import React, {useState} from 'react'
+import { toast } from 'react-toastify'
 
 const page = () => {
   const [loading, setLoading] = useState(false)
@@ -31,10 +32,12 @@ const page = () => {
       const data = await response.json()
       console.log(data, "APi")
       if (data.success) {
-        alert("Registration successful")
+        toast.success(data.message)
+        setUserData("")
         window.location.href = "/login"
       } else {
-        alert(data.message)
+        toast.error(data.message)
+        setUserData("")
       }
       setLoading(false)
     } catch (error) {
@@ -50,7 +53,33 @@ const page = () => {
             <input onChange={handleChange} name='username' type="text" placeholder='Username' required className='border-[1px] border-[#b99d75] bg-white p-3 outline-hidden w-full rounded-md' />
             <input onChange={handleChange} name='email' type="email" placeholder='Email' required className='border-[1px] border-[#b99d75] outline-hidden p-3 rounded-md' />
             <input onChange={handleChange} name='password' type="password" placeholder='Password' required className='border-[1px] border-[#b99d75] p-3 outline-hidden rounded-md' />
-            <button onClick={handleSubmit} type="submit" className='bg-[#b99d75] text-white py-3 rounded-md'>Register</button>
+              <button onClick={handleSubmit} type="submit" className='bg-[#b99d75] text-white py-3 rounded-md flex justify-center items-center gap-1'>{loading ? (
+                <>
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v8H4z"
+                    ></path>
+                  </svg>
+                  Registering...
+                </>
+              ) : (
+                "Register"
+              )}</button>
             <div className='flex justify-center items-center gap-3'>
               <button className='cursor-pointer'><img className='w-[50px]' src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="" /></button>
             </div>
