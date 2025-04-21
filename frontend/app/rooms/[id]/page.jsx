@@ -9,6 +9,8 @@ import { GrPrevious, GrNext } from "react-icons/gr";
 import { LuShoppingCart } from "react-icons/lu";
 import { MdOutlineLocalLaundryService } from "react-icons/md";
 import Slider from 'react-slick';
+import { useParams } from 'next/navigation';
+import { useFetchHotelRoomById } from '@/app/utils/dataQuery';
 
 const details = () => {
   const [open, setOpen] = useState("");
@@ -16,6 +18,16 @@ const details = () => {
   const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
   const [rooms, setRooms] = useState(0)
+  const params = useParams()
+  //const { id } = params
+
+  const id = params?.id;
+
+  const roomId = typeof id === 'string' ? id : '';
+
+  const { data, isLoading, error } = useFetchHotelRoomById(roomId)
+  console.log(data, "ROOM")
+  console.log(id, "ID")
   const img = [
     "https://www.image.direvhotel.com/14075/1711620359ClassicSuite.jpeg",
     "https://www.image.direvhotel.com/14075/1711620250ExecutiveRoomBedroom-min.jpg",
@@ -25,9 +37,9 @@ const details = () => {
   const goTo = (direction) => {
     let nextIndex;
     if (direction === "next") {
-      nextIndex = (button + 1) % img.length;
+      nextIndex = (button + 1) % data?.img.length;
     } else if (direction === "prev") {
-      nextIndex = (button - 1 + img.length) % img.length;
+      nextIndex = (button - 1 + data?.img.length) % data?.img.length;
     }
     setButton(nextIndex);
   };
@@ -35,7 +47,7 @@ const details = () => {
     <div className='bg-[#000]'>
       <div className='relative mb-10'>
         <div className=' w-full'>
-          <img src={img[button]} className='w-full h-[600px] max-sm:h-[400px] object-cover' alt="" />
+          <img src={data?.img[button]} className='w-full h-[600px] max-sm:h-[400px] object-cover' alt="" />
           <div className='flex items-center justify-between mx-20 absolute top-0 right-0 left-0 bottom-0 m-auto max-sm:mx-10'>
             <button onClick={() => goTo("prev")} className='text-black cursor-pointer flex items-center justify-center w-[50px] h-[50px] rounded-[50%] bg-white'><GrPrevious /></button>
             <button onClick={() => goTo("next")} className='text-black cursor-pointer flex items-center justify-center w-[50px] h-[50px] rounded-[50%] bg-white'><GrNext /></button>
@@ -108,7 +120,7 @@ const details = () => {
           <div className='bg-[#151719] p-10 flex flex-col gap-5'>
             <div className='flex justify-between items-center text-[#FFFFFF]'>
               <p className='text-[24px] font-bold uppercase'>Reserve:</p>
-              <p>From ₦55,000/night</p>
+              <p>From {data?.price} /night</p>
             </div>
             <div onClick={() => setOpen(open === "check" ? "" : "check")} className='relative flex justify-between p-3 cursor-pointer border-[1px] border-[rgb(185,157,117)] text-white'>
               <p>Check In</p>               
