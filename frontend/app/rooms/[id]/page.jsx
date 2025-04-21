@@ -17,7 +17,7 @@ const details = () => {
   const [button, setButton] = useState(0)
   const [adults, setAdults] = useState(1)
   const [children, setChildren] = useState(0)
-  const [rooms, setRooms] = useState(0)
+  const [rooms, setRooms] = useState(1)
   const params = useParams()
   //const { id } = params
 
@@ -26,6 +26,8 @@ const details = () => {
   const roomId = typeof id === 'string' ? id : '';
 
   const { data, isLoading, error } = useFetchHotelRoomById(roomId)
+
+  const totalPrice = data?.price * rooms;
   console.log(data, "ROOM")
   console.log(id, "ID")
   const img = [
@@ -130,7 +132,7 @@ const details = () => {
                   <div className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
                     <p>Rooms</p>
                     <div className='flex items-center gap-3'>
-                      <button disabled={rooms === 0} onClick={() => setRooms (prev => prev - 1)}>-</button>
+                      <button disabled={rooms === 1} onClick={() => setRooms (prev => prev - 1)}>-</button>
                       <p>{rooms}</p>
                       <button onClick={() => setRooms (prev => prev + 1)}>+</button>
                     </div>
@@ -162,11 +164,11 @@ const details = () => {
                   <div onClick={(e) => {
                     e.stopPropagation();
                   }} className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
-                    <p>Children</p>
+                    <p>Room</p>
                     <div className='flex items-center gap-3'>
-                      <button disabled={rooms === 0} onClick={() => setRooms (prev => prev - 1)}>-</button>
-                      <p>{children}</p>
-                      <button onClick={() => setRooms (prev => prev + 1)}>+</button>
+                      <button className='cursor-pointer' disabled={rooms === 1} onClick={() => setRooms (prev => prev - 1)}>-</button>
+                      <p>{rooms}</p>
+                      <button className='cursor-pointer' onClick={() => setRooms (prev => prev + 1)}>+</button>
                     </div>
                   </div>
                 )
@@ -182,9 +184,9 @@ const details = () => {
                   }} className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
                     <p>Adults</p>
                     <div className='flex items-center gap-3'>
-                      <p disabled={adults === 1} onClick={()=>setAdults(prev => prev - 1)}>-</p>
+                      <button className='cursor-pointer' disabled={adults === 1} onClick={()=>setAdults(prev => prev - 1)}>-</button>
                       <p>{adults}</p>
-                      <p onClick={()=>setAdults(prev => prev + 1)}>+</p>
+                      <button className='cursor-pointer' onClick={()=>setAdults(prev => prev + 1)}>+</button>
                     </div>
                   </div>)
                 }
@@ -199,9 +201,9 @@ const details = () => {
                     }} className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
                      <p>Children</p>
                       <div className='flex items-center gap-3'>
-                        <p disabled={children === 0} onClick={()=>setChildren(prev => prev - 1)}>-</p>
+                        <button className='cursor-pointer' disabled={children === 0} onClick={()=>setChildren(prev => prev - 1)}>-</button>
                         <p>{children}</p>
-                        <p onClick={()=>setChildren(prev => prev + 1)}>+</p>
+                        <button className='cursor-pointer' onClick={()=>setChildren(prev => prev + 1)}>+</button>
                       </div>
                     </div>
                   )
@@ -209,8 +211,16 @@ const details = () => {
               </div>
             </div>
             <div className='flex justify-between items-center text-[#FFFFFF]'>
+              <div>
+                span
+                <p className='text-[18px]'>Total</p>
+              </div>
+              <p className='text-[20px] font-bold'>₦{data?.breakfastPrice
+              }</p>
+            </div>
+            <div className='flex justify-between items-center text-[#FFFFFF]'>
               <p className='text-[18px]'>Total</p>
-              <p className='text-[20px] font-bold'>₦110,000</p>
+              <p className='text-[20px] font-bold'>₦{totalPrice}</p>
             </div>
             <button className='bg-[#000] py-3 text-[#FFFFFF] w-full'>Book now</button>
           </div>
