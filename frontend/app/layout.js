@@ -4,7 +4,9 @@ import { Navbar } from "./components/Navbar";
 import Footer from "./subpages/Footer";
 import ScrollToTop from "./subpages/ScrollToTop";
 import { ToastContainer } from "react-toastify";
+import queryClient from "./utils/ReactQueryClient";
 import { StoreContext } from "./context/StoreContext";
+import ReactQueryClient from "./utils/ReactQueryClient";
 
 // Load fonts
 const roboto = Roboto({
@@ -29,11 +31,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={` relative ${roboto.className} ${marcellus.className}`}>
         <StoreContext>
-          <ToastContainer />
-          <Navbar />
-          {children}
-          <ScrollToTop />
-          <Footer />
+          <ReactQueryClient>
+            <ToastContainer />
+            <Navbar />
+            {children}
+            <ScrollToTop />
+            <Footer />
+          </ReactQueryClient>
         </StoreContext>
       </body>
     </html>

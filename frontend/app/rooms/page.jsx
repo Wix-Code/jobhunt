@@ -11,6 +11,8 @@ import 'react-date-range/dist/theme/default.css';
 import { DateRange, DateRangePicker } from 'react-date-range';
 import { addDays, format } from 'date-fns';
 import { useStore } from '../context/StoreContext';
+import { useFetchHotelRooms } from '../utils/dataQuery';
+import Link from 'next/link';
 
 const FindPage = () => {
   const [menu, setMenu] = useState("Executive")
@@ -24,6 +26,8 @@ const FindPage = () => {
       key: 'selection'
     }
   ]);
+  const { data: rooms, isLoading, error } = useFetchHotelRooms()
+  console.log(rooms, "rooms rooms rooms")
 
   var settings = {
     dots: true,
@@ -186,13 +190,13 @@ const FindPage = () => {
       <div className='custom-slider-wrapper my-5 relative max-sm:m-10'>
         <Slider {...settings}>
           {
-            data.map((rooms) => {
+            rooms?.rooms?.map((rooms) => {
               return (
-                <div key={rooms.id} className='flex flex-col gap-4 justify-center' style={{display: "flex", flexDirection: "column", gap: 20}}>
-                  <img className='w-full object-cover h-[230px]' src={rooms.img} alt="" />
-                  <p className='text-[#cfcece] text-[15px] mt-3 text-center'>{rooms.desc}</p>
+                <div key={rooms._id} className='flex flex-col gap-4 justify-center' style={{display: "flex", flexDirection: "column", gap: 20}}>
+                  <img className='w-full object-cover h-[230px]' src={rooms.img[0]} alt="" />
+                  <p className='text-[#cfcece] text-[15px] mt-3 text-center'>{rooms.desc.slice(0, 80)}...</p>
                   <div className='flex justify-center'>
-                  <button className='text-[#b99d75] flex justify-center mt-2 text-[16px] cursor-pointer hover:underline'>Discover more</button>
+                  <Link href={`/rooms/${rooms._id}`}><button className='text-[#b99d75] flex justify-center mt-2 text-[16px] cursor-pointer hover:underline'>Discover more</button></Link>
                   </div>
                 </div>
               )
