@@ -151,7 +151,7 @@ const FindPage = () => {
           menu === "Deluxe" ? 'text-[#FFCC00]' : 'text-[#FFFFFF]'
         }`}>Deluxe Rooms</button>
         <button onClick={() => setMenu("Standard")}  className={`uppercase max-sm:text-[13px] text-[15px] font-[600] cursor-pointer ${
-          menu === "Standard" ? 'text-[#FFCC00]' : 'text-[#FFFFFF]'
+          menu === "Standard Rooms" ? 'text-[#FFCC00]' : 'text-[#FFFFFF]'
         }`}>standard Rooms</button>
         <button onClick={() => setMenu("Royal")} className={`uppercase max-sm:text-[13px] text-[15px] font-[600] cursor-pointer ${
           menu === "Royal" ? 'text-[#FFCC00]' : 'text-[#FFFFFF]'
@@ -162,7 +162,7 @@ const FindPage = () => {
       </div>
       <div className=''>
         {
-          apiData?.filter((room) => room.filter === menu).map((rooms) => {
+          rooms?.room?.filter[0]((room) => room.name === menu).map((rooms) => {
             return (
                 <div key={rooms.id} className='flex max-sm:flex max-sm:flex-col items-center flex-row gap-20 max-sm:mx-5 max-sm:gap-5'>
                   <div className='flex-1 max-sm:w-full'>
