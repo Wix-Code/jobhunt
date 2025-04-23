@@ -37,9 +37,6 @@ const params = useParams()
     }
   ]);
 
-  //const breakfastPrice = data?.breakfastPrice || 0;
-  //const roomPrice = data?.price || 0;
-
   const getDaysDifference = (start, end) => {
     const startDate = new Date(start);
     const endDate = new Date(end);
@@ -67,7 +64,9 @@ const params = useParams()
     }
     setButton(nextIndex);
   };
-  if(isLoading) return <p>Loading...</p>
+
+  if (isLoading) return <p>Loading...</p>
+  
   return (
     <div className='bg-[#000]'>
       <div className='relative mb-10'>
