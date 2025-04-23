@@ -11,31 +11,53 @@ import { MdOutlineLocalLaundryService } from "react-icons/md";
 import Slider from 'react-slick';
 import { useParams } from 'next/navigation';
 import { useFetchHotelRoomById } from '@/app/utils/dataQuery';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+import { DateRange, DateRangePicker } from 'react-date-range';
+import { format } from 'date-fns';
 
 const details = () => {
-  const [open, setOpen] = useState("");
-  const [button, setButton] = useState(0)
-  const [adults, setAdults] = useState(1)
-  const [children, setChildren] = useState(0)
-  const [rooms, setRooms] = useState(1)
-  const params = useParams()
-  //const { id } = params
-
+const [open, setOpen] = useState("");
+const [button, setButton] = useState(0)
+const [adults, setAdults] = useState(1)
+const [children, setChildren] = useState(0)
+const [rooms, setRooms] = useState(1)
+const [breakfastIncluded, setBreakfastIncluded] = useState(false);
+const params = useParams()
+  format(new Date(2014, 1, 11), "yyyy-MM-dd");
   const id = params?.id;
-
   const roomId = typeof id === 'string' ? id : '';
-
   const { data, isLoading, error } = useFetchHotelRoomById(roomId)
 
-  const totalPrice = data?.price * rooms;
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
+
+  //const breakfastPrice = data?.breakfastPrice || 0;
+  //const roomPrice = data?.price || 0;
+
+  const getDaysDifference = (start, end) => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const timeDiff = endDate.getTime() - startDate.getTime();
+    return Math.max(Math.ceil(timeDiff / (1000 * 60 * 60 * 24)), 1);
+  };
+
+  const days = getDaysDifference(state[0].startDate, state[0].endDate);
+
+  const breakfastCost = breakfastIncluded ? (adults + children) * data?.breakfastPrice * days : 0;
+  const totalPrice = (data?.price * rooms * days) + breakfastCost;
+
+
+  //const totalPrice = data?.price * rooms;
   console.log(data, "ROOM")
   console.log(id, "ID")
-  const img = [
-    "https://www.image.direvhotel.com/14075/1711620359ClassicSuite.jpeg",
-    "https://www.image.direvhotel.com/14075/1711620250ExecutiveRoomBedroom-min.jpg",
-    "https://www.image.direvhotel.com/14075/1711620019ClassicStudio.jpeg",
-    "https://www.image.direvhotel.com/14075/1711619929classic.jpg"
-  ]
+
+  //CAROUSAL FUNCTION
   const goTo = (direction) => {
     let nextIndex;
     if (direction === "next") {
@@ -45,6 +67,7 @@ const details = () => {
     }
     setButton(nextIndex);
   };
+  if(isLoading) return <p>Loading...</p>
   return (
     <div className='bg-[#000]'>
       <div className='relative mb-10'>
@@ -124,37 +147,29 @@ const details = () => {
               <p className='text-[24px] font-bold uppercase'>Reserve:</p>
               <p>From {data?.price} /night</p>
             </div>
-            <div onClick={() => setOpen(open === "check" ? "" : "check")} className='relative flex justify-between p-3 cursor-pointer border-[1px] border-[rgb(185,157,117)] text-white'>
+            <div onClick={() => setOpen(open === "calender" ? "" : "calender")} className='relative flex justify-between p-3 cursor-pointer border-[1px] border-[rgb(185,157,117)] text-white'>
               <p>Check In</p>               
-              <p>2025/04/15</p>
-              {
-                open === "check" && (
-                  <div className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
-                    <p>Rooms</p>
-                    <div className='flex items-center gap-3'>
-                      <button disabled={rooms === 1} onClick={() => setRooms (prev => prev - 1)}>-</button>
-                      <p>{rooms}</p>
-                      <button onClick={() => setRooms (prev => prev + 1)}>+</button>
-                    </div>
+              <p>{state[0].startDate ? format(state[0].startDate, 'yyyy-MM-dd') : ''}</p>
+              <div className='absolute bottom-[-225px] z-10 top-0 left-0'>
+                {
+                  open === "calender" && (
+                    <div onClick={(e) => {
+                      e.stopPropagation();
+                    }} className='absolute bg-white w-full left-0 bottom-[-135px]'>
+                    <DateRange
+                      editableDateInputs={true}
+                      onChange={item => setState([item.selection])}
+                      moveRangeOnFirstSelection={false}
+                      ranges={state}
+                    />
                   </div>
-                )
-              }
+                  )
+                }
+              </div>
             </div>
-            <div onClick={() => setOpen(open === "check" ? "" : "check")} className='relative flex justify-between p-3 cursor-pointer border-[1px] border-[rgb(185,157,117)] text-white'>
+            <div onClick={() => setOpen(open === "calender" ? "" : "calender")} className='relative flex justify-between p-3 cursor-pointer border-[1px] border-[rgb(185,157,117)] text-white'>
               <p>Check Out</p>               
-              <p>2025/04/15</p>
-              {
-                open === "check" && (
-                  <div className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
-                    <p>Adults</p>
-                    <div className='flex items-center gap-3'>
-                      <button disabled={adults === 1} onClick={() => setAdults (prev => prev - 1)}>-</button>
-                      <p>{adults}</p>
-                      <button onClick={() => setAdults (prev => prev + 1)}>+</button>
-                    </div>
-                  </div>
-                )
-              }
+              <p>{state[0].endDate ? format(state[0].endDate, 'yyyy-MM-dd') : ''}</p>
             </div>
             <div onClick={() => setOpen(open === "room" ? "" : "room")} className='relative flex justify-between p-3 cursor-pointer border-[1px] border-[rgb(185,157,117)] text-white'>
               <p>Rooms</p>               
@@ -211,9 +226,9 @@ const details = () => {
               </div>
             </div>
             <div className='flex justify-between items-center text-[#FFFFFF]'>
-              <div>
-                span
-                <p className='text-[18px]'>Total</p>
+              <div className='flex items-center gap-2'>
+                <input checked={breakfastIncluded} onChange={(e) => setBreakfastIncluded(e.target.checked)} className='cursor-pointer border-0 outline-hidden p-[28px]' type="checkbox" name="" id="" />
+                <p className='text-[16px]'>Breakfast</p>
               </div>
               <p className='text-[20px] font-bold'>₦{data?.breakfastPrice
               }</p>
@@ -222,7 +237,7 @@ const details = () => {
               <p className='text-[18px]'>Total</p>
               <p className='text-[20px] font-bold'>₦{totalPrice}</p>
             </div>
-            <button className='bg-[#000] py-3 text-[#FFFFFF] w-full'>Book now</button>
+            <button className='bg-[#000] cursor-pointer hover:bg-[rgb(185,157,117)] py-3 text-[#FFFFFF] w-full'>Book now</button>
           </div>
         </div>
       </div>
