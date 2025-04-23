@@ -1,6 +1,6 @@
 "use client"
 import Location from '@/app/subpages/Location';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FaToiletPaper, FaTv, FaWifi } from 'react-icons/fa6';
 import { IoBedOutline } from "react-icons/io5";
 import { TbAirConditioning } from 'react-icons/tb';
@@ -15,15 +15,17 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DateRange, DateRangePicker } from 'react-date-range';
 import { format } from 'date-fns';
+import { storeContext } from '@/app/context/StoreContext';
 
 const details = () => {
-const [open, setOpen] = useState("");
-const [button, setButton] = useState(0)
-const [adults, setAdults] = useState(1)
-const [children, setChildren] = useState(0)
-const [rooms, setRooms] = useState(1)
-const [breakfastIncluded, setBreakfastIncluded] = useState(false);
-const params = useParams()
+  const [open, setOpen] = useState("");
+  const [button, setButton] = useState(0)
+  const [adults, setAdults] = useState(1)
+  const [children, setChildren] = useState(0)
+  const [rooms, setRooms] = useState(1)
+  const { submitReservation } = useContext(storeContext)
+  const [breakfastIncluded, setBreakfastIncluded] = useState(false);
+  const params = useParams()
   format(new Date(2014, 1, 11), "yyyy-MM-dd");
   const id = params?.id;
   const roomId = typeof id === 'string' ? id : '';
@@ -236,7 +238,7 @@ const params = useParams()
               <p className='text-[18px]'>Total</p>
               <p className='text-[20px] font-bold'>₦{totalPrice}</p>
             </div>
-            <button className='bg-[#000] cursor-pointer hover:bg-[rgb(185,157,117)] py-3 text-[#FFFFFF] w-full'>Book now</button>
+            <button onClick={submitReservation} className='bg-[#000] cursor-pointer hover:bg-[rgb(185,157,117)] py-3 text-[#FFFFFF] w-full'>Book now</button>
           </div>
         </div>
       </div>

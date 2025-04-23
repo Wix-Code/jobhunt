@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { data } from '../utils/dummyData'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 
 export const storeContext = createContext(null)
 export const StoreContext = ({ children }) => {
@@ -87,6 +88,10 @@ export const StoreContext = ({ children }) => {
     console.log(apidata, "Data");
   }, [apidata]); // log when apiData changes
 
+  const submitReservation = () => {
+   alert("okay")
+  }
+
   return (
     <storeContext.Provider value={{
       userData,
@@ -94,7 +99,8 @@ export const StoreContext = ({ children }) => {
       loading,
       handleChange,
       handleSubmit,
-      data
+      data,
+      submitReservation
     }}>
       {children}
     </storeContext.Provider>

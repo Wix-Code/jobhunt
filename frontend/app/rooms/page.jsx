@@ -15,7 +15,7 @@ import { useFetchHotelRooms } from '../utils/dataQuery';
 import Link from 'next/link';
 
 const FindPage = () => {
-  const [menu, setMenu] = useState("Executive")
+  const [menu, setMenu] = useState("Executive Room")
   format(new Date(2014, 1, 11), "yyyy-MM-dd");
   const [open, setOpen] = useState("")
   const { apiData } = useStore();
@@ -144,13 +144,13 @@ const FindPage = () => {
       <h1 className='text-[#ffffff] text-[35px] font-[600] max-sm:text-[18px] text-center max-sm:mx-5'>Explore our refined accommodation options <br /> and find the perfect space for your stay.</h1>
       <p className='text-[#cfcece] max-sm:mx-5 max-sm:text-[15px] text-[17px] text-center'>All rooms have a cozy, ultra clean bed and beddings, bathroom and shower, cable television,<br /> free WIFI and executive seat.</p>
       <div className='flex items-center justify-center gap-3 max-sm:mx-5 max-sm:gap-2 max-sm:flex-wrap max-sm:text-[16px]'>
-        <button onClick={() => setMenu("Executive")}  className={`uppercase max-sm:text-[13px] text-[15px] font-[600] cursor-pointer ${
-          menu === "Executive" ? 'text-[#FFCC00]' : 'text-[#FFFFFF]'
+        <button onClick={() => setMenu("Executive Room")}  className={`uppercase max-sm:text-[13px] text-[15px] font-[600] cursor-pointer ${
+          menu === "Executive Room" ? 'text-[#FFCC00]' : 'text-[#FFFFFF]'
         }`}>Executive Rooms</button>
         <button onClick={() => setMenu("Deluxe")}  className={`uppercase max-sm:text-[13px] text-[15px] font-[600] cursor-pointer ${
           menu === "Deluxe" ? 'text-[#FFCC00]' : 'text-[#FFFFFF]'
         }`}>Deluxe Rooms</button>
-        <button onClick={() => setMenu("Standard")}  className={`uppercase max-sm:text-[13px] text-[15px] font-[600] cursor-pointer ${
+        <button onClick={() => setMenu("Standard Rooms")}  className={`uppercase max-sm:text-[13px] text-[15px] font-[600] cursor-pointer ${
           menu === "Standard Rooms" ? 'text-[#FFCC00]' : 'text-[#FFFFFF]'
         }`}>standard Rooms</button>
         <button onClick={() => setMenu("Royal")} className={`uppercase max-sm:text-[13px] text-[15px] font-[600] cursor-pointer ${
@@ -162,11 +162,11 @@ const FindPage = () => {
       </div>
       <div className=''>
         {
-          rooms?.room?.filter[0]((room) => room.name === menu).map((rooms) => {
+          rooms?.rooms?.filter((room) => room.name === menu).map((rooms) => {
             return (
-                <div key={rooms.id} className='flex max-sm:flex max-sm:flex-col items-center flex-row gap-20 max-sm:mx-5 max-sm:gap-5'>
+                <div key={rooms._id} className='flex max-sm:flex max-sm:flex-col items-center flex-row gap-20 max-sm:mx-5 max-sm:gap-5'>
                   <div className='flex-1 max-sm:w-full'>
-                  <img src={rooms.img} className='h-[500px] max-sm:h-[300px] object-cover w-full' alt="" />
+                  <img src={rooms.img[0]} className='h-[500px] max-sm:h-[300px] object-cover w-full' alt="" />
                   </div>
                 <div className='flex-1 flex-col gap-10 flex max-sm:gap-3'>
                   <p className='text-[#b99d75] uppercase text-[12px] font-[600]'>Welcome to Wixad hotels</p>
@@ -178,7 +178,7 @@ const FindPage = () => {
                   </div>
                   <div className='flex items-center gap-4'>
                     <TbListDetails className='text-[#b99d75] text-[30px]' />
-                    <button className='text-[#b99d75] uppercase text-[12px] font-[600]'>Reserve This room</button>
+                    <Link href={`/rooms/${rooms._id}`}><button className='text-[#b99d75] uppercase text-[12px] cursor-pointer font-[600]'>Reserve This room</button></Link>
                   </div>
                 </div>
                 </div>
