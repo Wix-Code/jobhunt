@@ -5,9 +5,6 @@ import { toast } from 'react-toastify'
 
 export const storeContext = createContext(null)
 export const StoreProvider = ({ children }) => {
-  const [adults, setAdults] = useState(1)
-  const [child, setChild] = useState(0)
-  const [rooms, setRooms] = useState(1) 
   const [userData, setUserData] = useState({
     email: "",
     password: ""
@@ -58,10 +55,6 @@ export const StoreProvider = ({ children }) => {
     }
   };
 
-  const submitReservation = () => {
-   alert("okay")
-  }
-
   return (
     <storeContext.Provider value={{
       userData,
@@ -69,13 +62,6 @@ export const StoreProvider = ({ children }) => {
       loading,
       handleChange,
       handleSubmit,
-      submitReservation,
-      rooms,
-      setRooms,
-      adults, 
-      setAdults,
-      child,
-      setChild
     }}>
       {children}
     </storeContext.Provider>

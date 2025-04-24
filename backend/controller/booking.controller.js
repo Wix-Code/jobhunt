@@ -12,8 +12,7 @@ export const bookRoom = async (req, res) => {
     rooms,
     adults,
     children,
-    breakfast,
-    
+    breakfast, 
   } = req.body;
 
   // Basic required fields validation
