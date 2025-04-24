@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 import Location from '../subpages/Location'
+import { useStore } from '../context/StoreProvider'
+import { toast } from 'react-toastify'
 
 const page = () => {
   const [bookDetails, setBookDetails] = useState({
@@ -11,10 +13,17 @@ const page = () => {
     phoneNo: "",
     address: "",
   })
-
+  const { booking } = useStore()
+  
   const handSubmit = async () => {
-
+    const totalPrice = booking?.totalPrice;
+    const bookingId = booking?._id
+    if (!totalPrice && bookingId) {
+      return toast.error("No total price and booking id")
+    }
   }
+
+  console.log(booking)
   return (
     <div className=' bg-[#151719]'>
       <div className='flex justify-center items-center' style={{backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url("https://media.cntravellerme.com/photos/64a6c72751562a659243e175/16:9/w_2560%2Cc_limit/atlantis%2520theroyal-skypoolvilla-terrace-sunset-mr.jpg")`,

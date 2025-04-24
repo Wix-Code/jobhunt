@@ -11,6 +11,7 @@ export const StoreProvider = ({ children }) => {
   })
   const [loading, setLoading] = useState(false)
   const [userId, setUserId] = useState(null);
+  const [booking, setBooking] = useState({})
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -24,6 +25,19 @@ export const StoreProvider = ({ children }) => {
   useEffect(() => {
     console.log("User ID updated:", userId);
   }, [userId]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const book = JSON.parse(localStorage.getItem("booking"));
+      setBooking(book);
+      console.log(booking)
+    }
+    
+  }, []);
+
+  useEffect(() => {
+    console.log("booking updated:", booking);
+  }, [booking]);
   
  console.log(userId)
 
@@ -75,6 +89,7 @@ export const StoreProvider = ({ children }) => {
       userData,
       setUserData,
       loading,
+      booking,
       handleChange,
       handleSubmit,
       userId

@@ -72,7 +72,7 @@ const details = () => {
     }
     const roomId = id
     try {
-      const book = await fetch(`http://localhost:8800/api/book`, {
+      const response = await fetch(`http://localhost:8800/api/book`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,12 +87,13 @@ const details = () => {
           checkIn
         })
       })
-      const data = await book.json();
+      const data = await response.json();
       if (!response.ok) {
         throw new Error(data.message || "Booking failed. Please try again.");
       }
       if (data.success) {
         toast.success(data.message || "Room booked successfully!");
+        localStorage.setItem("booking", JSON.stringify(data.booking))
         window.location.replace("/checkout");
       } else {
         toast.error(data.message || "Booking failed");

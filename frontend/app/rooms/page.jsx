@@ -63,6 +63,8 @@ const FindPage = () => {
       }
     ]
   };
+
+  if(isLoading) return <p>Loading...</p>
   return <div className='bg-[#151719]'>
     <div className='flex justify-center items-center' style={{backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url("https://www.thegeorgelagos.com/assets/george-hotel/images/Studio-Suites.jpg")`,
       backgroundSize: "cover",
