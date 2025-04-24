@@ -15,15 +15,12 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DateRange, DateRangePicker } from 'react-date-range';
 import { format } from 'date-fns';
-import { storeContext } from '@/app/context/StoreContext';
+import { storeContext, useStore } from '@/app/context/StoreProvider';
 
 const details = () => {
   const [open, setOpen] = useState("");
   const [button, setButton] = useState(0)
-  const [adults, setAdults] = useState(1)
-  const [children, setChildren] = useState(0)
-  const [rooms, setRooms] = useState(1)
-  const { submitReservation } = useContext(storeContext)
+  const { submitReservation, rooms, children, setAdults, adults, setRooms, setChildren } = useStore()
   const [breakfastIncluded, setBreakfastIncluded] = useState(false);
   const params = useParams()
   format(new Date(2014, 1, 11), "yyyy-MM-dd");

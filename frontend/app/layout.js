@@ -5,7 +5,7 @@ import Footer from "./subpages/Footer";
 import ScrollToTop from "./subpages/ScrollToTop";
 import { ToastContainer } from "react-toastify";
 import queryClient from "./utils/ReactQueryClient";
-import { StoreContext } from "./context/StoreContext";
+import { StoreProvider } from "./context/StoreProvider";
 import ReactQueryClient from "./utils/ReactQueryClient";
 
 // Load fonts
@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={` relative ${roboto.className} ${marcellus.className}`}>
-        <StoreContext>
+        <StoreProvider>
           <ReactQueryClient>
             <ToastContainer />
             <Navbar />
@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
             <ScrollToTop />
             <Footer />
           </ReactQueryClient>
-        </StoreContext>
+        </StoreProvider>
       </body>
     </html>
   );

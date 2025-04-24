@@ -1,18 +1,19 @@
 "use client"
 
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { data } from '../utils/dummyData'
 import { toast } from 'react-toastify'
-import { useRouter } from 'next/router'
 
 export const storeContext = createContext(null)
-export const StoreContext = ({ children }) => {
+export const StoreProvider = ({ children }) => {
+  const [adults, setAdults] = useState(1)
+  const [child, setChild] = useState(0)
+  const [rooms, setRooms] = useState(1) 
   const [userData, setUserData] = useState({
     email: "",
     password: ""
   })
   const [loading, setLoading] = useState(false)
-  const [apidata, setApiData] = useState([])
+ 
 
   const handleChange = async (e) => {
     const { name, value } = e.target
@@ -57,37 +58,6 @@ export const StoreContext = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("http://localhost:8800/api/room", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-          },
-        });
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch data");
-        }
-
-        const data = await res.json();
-        console.log(data, "Response");
-
-        setApiData(data?.rooms || []);
-      } catch (error) {
-        console.error("Error fetching rooms:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    console.log(apidata, "Data");
-  }, [apidata]); // log when apiData changes
-
   const submitReservation = () => {
    alert("okay")
   }
@@ -99,8 +69,13 @@ export const StoreContext = ({ children }) => {
       loading,
       handleChange,
       handleSubmit,
-      data,
-      submitReservation
+      submitReservation,
+      rooms,
+      setRooms,
+      adults, 
+      setAdults,
+      child,
+      setChild
     }}>
       {children}
     </storeContext.Provider>

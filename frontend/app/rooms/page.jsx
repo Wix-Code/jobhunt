@@ -10,7 +10,7 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DateRange, DateRangePicker } from 'react-date-range';
 import { addDays, format } from 'date-fns';
-import { useStore } from '../context/StoreContext';
+import { useStore } from '../context/StoreProvider';
 import { useFetchHotelRooms } from '../utils/dataQuery';
 import Link from 'next/link';
 
