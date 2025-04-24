@@ -76,7 +76,6 @@ const details = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          
         },
         body: JSON.stringify({
           roomId,
@@ -89,9 +88,7 @@ const details = () => {
         })
       })
       const result = await book.json();
-      if (success === true) {
-        window.location.replace("/checkout");
-      }
+      //window.location.replace("/checkout");
       console.log(result); 
       //console.log(book, "book")
       

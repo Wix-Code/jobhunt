@@ -1,7 +1,20 @@
-import React from 'react'
+"use client"
+
+import React, { useState } from 'react'
 import Location from '../subpages/Location'
 
 const page = () => {
+  const [bookDetails, setBookDetails] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    phoneNo: "",
+    address: "",
+  })
+
+  const handSubmit = async () => {
+
+  }
   return (
     <div className=' bg-[#151719]'>
       <div className='flex justify-center items-center' style={{backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url("https://media.cntravellerme.com/photos/64a6c72751562a659243e175/16:9/w_2560%2Cc_limit/atlantis%2520theroyal-skypoolvilla-terrace-sunset-mr.jpg")`,
@@ -22,23 +35,23 @@ const page = () => {
             <div className='flex flex-col gap-5 w-full'>
               <div className='flex flex-col gap-2'>
                 <label htmlFor="fname" className='text-white font-medium'>First Name</label>
-                <input type="text" placeholder='Enter your first name' required className='border-[1px] text-white  border-gray-600 p-4 outline-hidden w-full ' />
+                <input onChange={handSubmit} name='fname' type="text" placeholder='Enter your first name' required className='border-[1px] text-white  border-gray-600 p-4 outline-hidden w-full ' />
               </div>
               <div className='flex flex-col gap-2'>
                 <label htmlFor="fname" className='text-white'>Last Name</label>
-                <input type="text" placeholder='Enter your last name' required className='border-[1px] text-white  border-gray-600 p-4 outline-hidden w-full ' />
+                <input type="text" onChange={handSubmit} name='lname' placeholder='Enter your last name' required className='border-[1px] text-white  border-gray-600 p-4 outline-hidden w-full ' />
               </div>
               <div className='flex flex-col gap-2'>
                 <label htmlFor="fname" className='text-white font-medium'>Email</label>
-                <input type="email" placeholder='Enter your email' required className='border-[1px] text-white border-gray-600 p-4 outline-hidden w-full ' />
+                <input onChange={handSubmit} name='email' type="email" placeholder='Enter your email' required className='border-[1px] text-white  border-gray-600 p-4 outline-hidden w-full ' />
               </div>
               <div className='flex flex-col gap-2'>
                 <label htmlFor="fname" className='text-white font-medium'>PhoneNo</label>
-                <input type="email" placeholder='Enter your phoneNo' required className='border-[1px] text-white border-gray-600 p-4 outline-hidden w-full ' />
+                <input onChange={handSubmit} name='phoneNo' type="text" placeholder='Enter your phoneNo' required className='border-[1px] text-white border-gray-600 p-4 outline-hidden w-full ' />
               </div>
               <div className='flex flex-col gap-2'>
                 <label htmlFor="fname" className='text-white font-medium'>Address</label>
-                <input type="text" placeholder='Enter your address' required className='border-[1px] text-white border-gray-600 p-4 outline-hidden w-full ' />
+                <input type="text" onChange={handSubmit} name='address' placeholder='Enter your address' required className='border-[1px] text-white border-gray-600 p-4 outline-hidden w-full ' />
               </div>
             </div>
           </form>
