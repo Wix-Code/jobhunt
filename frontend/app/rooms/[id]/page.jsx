@@ -16,19 +16,23 @@ import 'react-date-range/dist/theme/default.css';
 import { DateRange, DateRangePicker } from 'react-date-range';
 import { format } from 'date-fns';
 import { storeContext, useStore } from '@/app/context/StoreProvider';
+import { toast } from 'react-toastify';
 
 const details = () => {
   const [open, setOpen] = useState("");
   const [button, setButton] = useState(0)
   const [breakfastIncluded, setBreakfastIncluded] = useState(false);
+  const { userId } = useStore()
   const params = useParams()
   const [adults, setAdults] = useState(1)
-  const [child, setChild] = useState(0)
+  const [children, setChildren] = useState(0)
   const [rooms, setRooms] = useState(1) 
   format(new Date(2014, 1, 11), "yyyy-MM-dd");
   const id = params?.id;
   const roomId = typeof id === 'string' ? id : '';
   const { data, isLoading, error } = useFetchHotelRoomById(roomId)
+
+  console.log("userId", userId)
 
   const [state, setState] = useState([
     {
@@ -47,7 +51,7 @@ const details = () => {
 
   const days = getDaysDifference(state[0].startDate, state[0].endDate);
 
-  const breakfastCost = breakfastIncluded ? (adults + child) * data?.breakfastPrice * days : 0;
+  const breakfastCost = breakfastIncluded ? (adults + children) * data?.breakfastPrice * days : 0;
   const totalPrice = (data?.price * rooms * days) + breakfastCost;
 
 
@@ -56,19 +60,40 @@ const details = () => {
   console.log(id, "ID")
 
   const submitReservation = async () => {
+
+    if (!userId) {
+      toast.error("User is not logged in");
+      return;
+    }
+    const checkIn = state[0].startDate
+    const checkOut = state[0].endDate
+    if (new Date(checkOut) <= new Date(checkIn)) {
+      return toast.error("Check-out date must be after check-in date.");
+    }
+    const roomId = id
     try {
       const book = await fetch(`http://localhost:8800/api/book`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          
         },
         body: JSON.stringify({
+          roomId,
+          userId,
           rooms,
           adults,
-          child,
+          children,
+          checkOut,
+          checkIn
         })
       })
-      console.log(book, "book")
+      const result = await book.json();
+      if (success === true) {
+        window.location.replace("/checkout");
+      }
+      console.log(result); 
+      //console.log(book, "book")
       
     } catch (error) {
       console.log(error)
@@ -228,7 +253,7 @@ const details = () => {
               </div>
               <div onClick={() => setOpen(open === "children" ? "" : "children")}  className='relative cursor-pointer flex justify-between p-3 border-[1px] border-[rgb(185,157,117)] text-white w-full'>
                 <p>Children</p>               
-                <p>{child}</p>
+                <p>{children}</p>
                 {
                   open === "children" && (
                     <div onClick={(e) => {
@@ -236,8 +261,8 @@ const details = () => {
                     }} className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
                      <p>Children</p>
                       <div className='flex items-center gap-3'>
-                        <button className='cursor-pointer' disabled={child === 0} onClick={()=>setChild(prev => prev - 1)}>-</button>
-                        <p>{child}</p>
+                        <button className='cursor-pointer' disabled={child === 0} onClick={()=>setChildren(prev => prev - 1)}>-</button>
+                        <p>{children}</p>
                         <button className='cursor-pointer' onClick={()=>setChild(prev => prev + 1)}>+</button>
                       </div>
                     </div>

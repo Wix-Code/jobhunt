@@ -10,7 +10,22 @@ export const StoreProvider = ({ children }) => {
     password: ""
   })
   const [loading, setLoading] = useState(false)
- 
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const user = JSON.parse(localStorage.getItem("user"));
+      setUserId(user?._id || null);
+      console.log(user)
+    }
+    
+  }, []);
+
+  useEffect(() => {
+    console.log("User ID updated:", userId);
+  }, [userId]);
+  
+ console.log(userId)
 
   const handleChange = async (e) => {
     const { name, value } = e.target
@@ -62,6 +77,7 @@ export const StoreProvider = ({ children }) => {
       loading,
       handleChange,
       handleSubmit,
+      userId
     }}>
       {children}
     </storeContext.Provider>
