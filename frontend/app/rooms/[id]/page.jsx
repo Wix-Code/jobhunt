@@ -87,13 +87,19 @@ const details = () => {
           checkIn
         })
       })
-      const result = await book.json();
-      //window.location.replace("/checkout");
-      console.log(result); 
-      //console.log(book, "book")
-      
+      const data = await book.json();
+      if (!response.ok) {
+        throw new Error(data.message || "Booking failed. Please try again.");
+      }
+      if (data.success) {
+        toast.success(data.message || "Room booked successfully!");
+        window.location.replace("/checkout");
+      } else {
+        toast.error(data.message || "Booking failed");
+      }   
     } catch (error) {
       console.log(error)
+      toast.error(error.message || "Something went wrong during booking.");
     }
   }
 
