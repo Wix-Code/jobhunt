@@ -11,6 +11,7 @@ export const StoreProvider = ({ children }) => {
   })
   const [loading, setLoading] = useState(false)
   const [userId, setUserId] = useState(null);
+  const [orderId, setOrderId] = useState(null);
   const [booking, setBooking] = useState({})
 
   useEffect(() => {
@@ -38,6 +39,20 @@ export const StoreProvider = ({ children }) => {
   useEffect(() => {
     console.log("booking updated:", booking);
   }, [booking]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const order = JSON.parse(localStorage.getItem("order"));
+      setOrderId(order?._id || null);
+      console.log(order)
+    }
+    
+  }, []);
+
+  useEffect(() => {
+    console.log("Order ID updated:", orderId);
+  }, [orderId]);
+
   
  console.log(userId)
 
@@ -59,12 +74,9 @@ export const StoreProvider = ({ children }) => {
           "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify(userData),
-        credentials: 'include', 
+        credentials: 'include',
       });
-  
-      // Wait for the response to be parsed
       const data = await response.json();
-  
       if (data.success === true) {
         toast.success(data.message);
         localStorage.setItem("user", JSON.stringify(data.user));
@@ -92,7 +104,8 @@ export const StoreProvider = ({ children }) => {
       booking,
       handleChange,
       handleSubmit,
-      userId
+      userId,
+      orderId
     }}>
       {children}
     </storeContext.Provider>
