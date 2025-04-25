@@ -1,7 +1,7 @@
 "use client"
 import Location from '@/app/subpages/Location';
 import React, { useContext, useState } from 'react'
-import { FaToiletPaper, FaTv, FaWifi } from 'react-icons/fa6';
+import { FaBath, FaToiletPaper, FaTv, FaWifi } from 'react-icons/fa6';
 import { IoBedOutline } from "react-icons/io5";
 import { TbAirConditioning } from 'react-icons/tb';
 import { CiLight } from "react-icons/ci";
@@ -53,11 +53,6 @@ const details = () => {
 
   const breakfastCost = breakfastIncluded ? (adults + children) * data?.breakfastPrice * days : 0;
   const totalPrice = (data?.price * rooms * days) + breakfastCost;
-
-
-  //const totalPrice = data?.price * rooms;
-  console.log(data, "ROOM")
-  console.log(id, "ID")
 
   const submitReservation = async () => {
 
@@ -115,7 +110,7 @@ const details = () => {
     setButton(nextIndex);
   };
 
-  if (isLoading) return <p>Loading...</p>
+  //if (isLoading) return <p>Loading...</p>
   
   return (
     <div className='bg-[#000]'>
@@ -130,67 +125,63 @@ const details = () => {
       </div>
       <div className='flex max-w-[1100px] m-auto max-sm:flex-col max-sm:mx-5 max-sm:gap-3'>
         <div className='flex-2 text-[#FFFFFF] flex flex-col gap-4'>
-          <p className='text-[30px] font-[600]'>Reserve Royal Rooms</p>
+          <p className='text-[30px] max-sm:text-[24px] font-[600]'>Reserve Royal Rooms</p>
           <div className='flex items-center gap-4 max-sm:flex-wrap'>
             <div className='flex items-center gap-3'>
-              <IoBedOutline className='text-[28px]' />
-              <p className='text-[14px]'>4 Guests</p>
+              <TbAirConditioning className='text-[28px] max-sm:text-[26px]' />
+              <p className='text-[14px]'>Air Conditioning</p>
             </div>
             <div className='flex items-center gap-3'>
-              <IoBedOutline className='text-[28px]' />
-              <p className='text-[14px]'>4 Guests</p>
+              <IoBedOutline className='text-[28px] max-sm:text-[26px]' />
+              <p className='text-[14px]'>1 Queen Sized Bed</p>
             </div>
             <div className='flex items-center gap-3'>
-              <IoBedOutline className='text-[28px]' />
-              <p className='text-[14px]'>4 Guests</p>
+              <FaBath className='text-[28px] max-sm:text-[26px]' />
+              <p className='text-[14px]'>1 Bathroom</p>
             </div>
             <div className='flex items-center gap-3'>
-              <IoBedOutline className='text-[28px]' />
-              <p className='text-[14px]'>4 Guests</p>
-            </div>
-            <div className='flex items-center gap-3'>
-              <IoBedOutline className='text-[28px]' />
-              <p className='text-[14px]'>4 Guests</p>
+              <FaWifi className='text-[28px] max-sm:text-[26px]' />
+              <p className='text-[14px]'>Free WiFi</p>
             </div>
           </div>
-          <p className='text-[28px] mt-10'>Room Amenities</p>
+          <p className='text-[28px] max-sm:text-[24px] mt-10'>Room Amenities</p>
           <div className='grid grid-cols-2 gap-5 max-sm:grid-cols-1'>
             <div className='flex items-center gap-3'>
-              <CiLight className='text-[45px] text-[#cfcece]' />
+              <CiLight className='text-[45px] max-sm:text-[28px] text-[rgb(185,157,117)]'/>
               <p className='text-[18px]'>24/7 Light</p>
             </div>
             <div className='flex items-center gap-3'>
-              <TbAirConditioning className='text-[45px] text-[#cfcece]' />
+              <TbAirConditioning className='text-[45px] max-sm:text-[28px] text-[rgb(185,157,117)]'/>
               <p className='text-[18px]'>Air Conditioner</p>
             </div>
             <div className='flex items-center gap-3'>
-              <LuShoppingCart className='text-[45px] text-[#cfcece]' />
+              <LuShoppingCart className='text-[45px] max-sm:text-[28px] text-[rgb(185,157,117)]'/>
               <p className='text-[18px]'>In-hotel Supermaket</p>
             </div>
             <div className='flex items-center gap-3'>
-              <IoBedOutline className='text-[45px] text-[#cfcece]' />
+              <IoBedOutline className='text-[45px] max-sm:text-[28px] text-[rgb(185,157,117)]'/>
               <p className='text-[18px]'>Room Services</p>
             </div>
             <div className='flex items-center gap-3'>
-              <MdOutlineLocalLaundryService className='text-[45px] text-[#cfcece]' />
+              <MdOutlineLocalLaundryService className='text-[45px] text-[rgb(185,157,117)] max-sm:text-[28px]' />
               <p className='text-[18px]'>Laundry Services</p>
             </div>
             <div className='flex items-center gap-3'>
-              <FaTv className='text-[45px] text-[#cfcece]' />
+              <FaTv className='text-[45px] text-[rgb(185,157,117)] max-sm:text-[28px]' />
               <p className='text-[18px]'>Cable TV</p>
             </div>
             <div className='flex items-center gap-3'>
-              <FaWifi className='text-[45px] text-[#cfcece]' />
+              <FaWifi className='text-[45px] text-[rgb(185,157,117)] max-sm:text-[28px]' />
               <p className='text-[18px]'>Free Wifi & Internet</p>
             </div>
             <div className='flex items-center gap-3'>
-              <FaToiletPaper className='text-[45px] text-[#cfcece]' />
+              <FaToiletPaper className='text-[45px] text-[rgb(185,157,117)] max-sm:text-[28px]' />
               <p className='text-[18px]'>Towels/Toiletries</p>
             </div>
           </div>
         </div>
 
-        <div className='flex-1'>
+        <div className='flex-1 max-sm:mt-4'>
           <div className='bg-[#151719] p-10 flex flex-col gap-5'>
             <div className='flex justify-between items-center text-[#FFFFFF]'>
               <p className='text-[24px] font-bold uppercase'>Reserve:</p>
@@ -199,7 +190,7 @@ const details = () => {
             <div onClick={() => setOpen(open === "calender" ? "" : "calender")} className='relative flex justify-between p-3 cursor-pointer border-[1px] border-[rgb(185,157,117)] text-white'>
               <p>Check In</p>               
               <p>{state[0].startDate ? format(state[0].startDate, 'yyyy-MM-dd') : ''}</p>
-              <div className='absolute bottom-[-225px] z-10 top-0 left-0'>
+              <div className='absolute bottom-[-225px] z-10 max-sm:left-[-30px] top-0 left-0'>
                 {
                   open === "calender" && (
                     <div onClick={(e) => {

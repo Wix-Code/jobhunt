@@ -168,18 +168,18 @@ const FindPage = () => {
             return (
                 <div key={rooms._id} className='flex max-sm:flex max-sm:flex-col items-center flex-row gap-20 max-sm:mx-5 max-sm:gap-5'>
                   <div className='flex-1 max-sm:w-full'>
-                  <img src={rooms.img[0]} className='h-[500px] max-sm:h-[300px] object-cover w-full' alt="" />
+                    <img src={rooms.img[0]} className='h-[500px] max-sm:h-[300px] object-cover w-full' alt="" />
                   </div>
                 <div className='flex-1 flex-col gap-10 flex max-sm:gap-3'>
                   <p className='text-[#b99d75] uppercase text-[12px] font-[600]'>Welcome to Wixad hotels</p>
-                  <h1 className='text-[#ffffff] text-[40px] font-[600]'>{rooms.name}</h1>
-                  <p className='text-[#cfcece] text-[17px]'>{rooms.desc}</p>
+                  <h1 className='text-[#ffffff] text-[40px] max-sm:text-[22px] font-[600]'>{rooms.name}</h1>
+                  <p className='text-[#cfcece] max-sm:text-[15px] text-[17px]'>{rooms.desc}</p>
                   <div className='flex items-center gap-4'>
-                    <TbListDetails className='text-[#b99d75] text-[30px]' />
+                    <TbListDetails className='text-[#b99d75] max-sm:text-[22px] text-[30px]' />
                     <button className='text-[#b99d75] uppercase text-[12px] font-[600]'>Features of this room</button>
                   </div>
                   <div className='flex items-center gap-4'>
-                    <TbListDetails className='text-[#b99d75] text-[30px]' />
+                    <TbListDetails className='text-[#b99d75]  max-sm:text-[22px] text-[30px]' />
                     <Link href={`/rooms/${rooms._id}`}><button className='text-[#b99d75] uppercase text-[12px] cursor-pointer font-[600]'>Reserve This room</button></Link>
                   </div>
                 </div>
@@ -219,9 +219,9 @@ const FindPage = () => {
             icon.map((icon) => {
               return (
                 <div key={icon.id} className='flex flex-col gap-2'>
-                  <p className='text-[#b99d75] text-[34px] max-sm:text-[28px]'>{icon.icon}</p>
-                  <p className='text-[#ffffff] text-[22px] max-sm:text-[18px]'>{icon.name}</p>
-                  <p className='text-[#cfcece] text-[14px] max-sm:text-[16px]'>{icon.desc}</p>
+                  <p className='text-[#b99d75] text-[34px] max-sm:text-[24px]'>{icon.icon}</p>
+                  <p className='text-[#ffffff] text-[22px] max-sm:text-[17px]'>{icon.name}</p>
+                  <p className='text-[#cfcece] text-[14px] max-sm:text-[15px]'>{icon.desc}</p>
                 </div>
               )
             })
