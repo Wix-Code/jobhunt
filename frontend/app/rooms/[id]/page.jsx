@@ -72,7 +72,7 @@ const details = () => {
     }
     const roomId = id
     try {
-      const response = await fetch(`http://localhost:8800/api/book`, {
+      const response = await fetch(`https://wixad-hotels.onrender.com/api/book`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

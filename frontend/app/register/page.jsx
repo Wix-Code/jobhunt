@@ -22,7 +22,7 @@ const page = () => {
     console.log(userData)
     setLoading(true)
     try {
-      const response = await fetch("http://localhost:8800/api/auth/register", {
+      const response = await fetch("https://wixad-hotels.onrender.com/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

@@ -39,7 +39,7 @@ const page = () => {
     }
   
     try {
-      const response = await fetch(`http://localhost:8800/api/book/order`, {
+      const response = await fetch(`https://wixad-hotels.onrender.com/api/book/order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const page = () => {
         toast.success(data.message || "Details submitted successfully.");
         localStorage.setItem("order", (JSON.stringify(data.order)))
 
-        const payment = await fetch(`http://localhost:8800/api/book/payment`, {
+        const payment = await fetch(`https://wixad-hotels.onrender.com/api/book/payment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

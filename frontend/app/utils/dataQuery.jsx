@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 const fetchHotelRooms = async () => {
-  const response = await fetch("http://localhost:8800/api/room", {
+  const response = await fetch("https://wixad-hotels.onrender.com/api/room", {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
@@ -24,7 +24,7 @@ export const useFetchHotelRooms = () => {
 };
 
 const fetchHotelRoomById = async (id) => {
-  const response = await fetch(`http://localhost:8800/api/room/${id}`, {
+  const response = await fetch(`https://wixad-hotels.onrender.com/api/room/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json"

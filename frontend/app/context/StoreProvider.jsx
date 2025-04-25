@@ -66,7 +66,7 @@ export const StoreProvider = ({ children }) => {
     setLoading(true);
   
     try {
-      const response = await fetch("http://localhost:8800/api/auth/login", {
+      const response = await fetch("https://wixad-hotels.onrender.com/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
