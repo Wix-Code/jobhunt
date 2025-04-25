@@ -17,6 +17,7 @@ import { DateRange, DateRangePicker } from 'react-date-range';
 import { format } from 'date-fns';
 import { storeContext, useStore } from '@/app/context/StoreProvider';
 import { toast } from 'react-toastify';
+import Spinner from '@/app/subpages/Spinner';
 
 const details = () => {
   const [open, setOpen] = useState("");
@@ -110,7 +111,7 @@ const details = () => {
     setButton(nextIndex);
   };
 
-  //if (isLoading) return <p>Loading...</p>
+  if (isLoading) return <Spinner />
   
   return (
     <div className='bg-[#000]'>

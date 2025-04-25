@@ -13,6 +13,7 @@ import { addDays, format } from 'date-fns';
 import { useStore } from '../context/StoreProvider';
 import { useFetchHotelRooms } from '../utils/dataQuery';
 import Link from 'next/link';
+import Spinner from '../subpages/Spinner';
 
 const FindPage = () => {
   const [menu, setMenu] = useState("Executive Room")
@@ -64,7 +65,7 @@ const FindPage = () => {
     ]
   };
 
-  if(isLoading) return <p>Loading...</p>
+  if(isLoading) return <Spinner />
   return <div className='bg-[#151719]'>
     <div className='flex justify-center items-center' style={{backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url("https://www.thegeorgelagos.com/assets/george-hotel/images/Studio-Suites.jpg")`,
       backgroundSize: "cover",
