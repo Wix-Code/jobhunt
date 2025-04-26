@@ -19,7 +19,6 @@ const FindPage = () => {
   const [menu, setMenu] = useState("Executive Room")
   format(new Date(2014, 1, 11), "yyyy-MM-dd");
   const [open, setOpen] = useState("")
-  const { apiData } = useStore();
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -31,7 +30,6 @@ const FindPage = () => {
   console.log(rooms, "rooms rooms rooms")
 
   var settings = {
-    dots: true,
     infinite: false,
     speed: 500,
     slidesToShow: 4,

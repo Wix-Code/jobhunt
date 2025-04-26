@@ -218,7 +218,7 @@ export const makePayment = async (req, res) => {
       email: order.email,
       amount: Math.round(order.amount * 100), // Paystack requires the amount in kobo
       currency: "NGN",
-      callback_url: `${url}/verify?orderId=${orderId}`,
+      callback_url: "http://localhost:3000",
     });
 
     if (response.status) {

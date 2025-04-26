@@ -191,12 +191,12 @@ const details = () => {
             <div onClick={() => setOpen(open === "calender" ? "" : "calender")} className='relative flex justify-between p-3 cursor-pointer border-[1px] border-[rgb(185,157,117)] text-white'>
               <p>Check In</p>               
               <p>{state[0].startDate ? format(state[0].startDate, 'yyyy-MM-dd') : ''}</p>
-              <div className='absolute bottom-[-225px] z-10 max-sm:left-[-30px] top-0 left-0'>
+              <div className='absolute bottom-[-225px] z-10 max-sm:left-[-40px] top-0 left-0'>
                 {
                   open === "calender" && (
                     <div onClick={(e) => {
                       e.stopPropagation();
-                    }} className='absolute bg-white w-full left-0 bottom-[-135px]'>
+                    }} className='absolute bg-white max-sm:w-full w-full left-0 bottom-[-135px]'>
                     <DateRange
                       editableDateInputs={true}
                       onChange={item => setState([item.selection])}

@@ -13,7 +13,7 @@ const page = () => {
     phoneNo: "",
     address: "",
   })
-  const { booking, userId, orderId } = useStore()
+  const { booking, userId } = useStore()
   
   const handleSubmit = async (e) => {
     const { name, value } = e.target
@@ -56,7 +56,6 @@ const page = () => {
   
       if (data.success === true) {
         toast.success(data.message || "Details submitted successfully.");
-        localStorage.setItem("order", (JSON.stringify(data.order)))
 
         const payment = await fetch(`https://wixad-hotels.onrender.com/api/book/payment`, {
           method: "POST",
@@ -65,14 +64,16 @@ const page = () => {
           },
           body: JSON.stringify({
             userId,
-            orderId,
+            orderId: data.order._id,
             email: bookDetails.email,
             amount: booking.totalPrice,
+            callback_url: "http://localhost:3000/rooms",
           }),
         })
         const pay = await payment.json();
         if (pay.success === true) {
           window.location.replace(pay.authorization_url);
+          localStorage.clear("booking")
         }
         console.log(pay, "Payment data")
       } else {
@@ -85,7 +86,7 @@ const page = () => {
       toast.error("An error occurred while processing the payment.");
     }
   
-    console.log("Payment Info:", { totalPrice, bookingId, userId, bookDetails, orderId });
+    console.log("Payment Info:", { totalPrice, bookingId, userId, bookDetails, orderData });
   };
   
 
