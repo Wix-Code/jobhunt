@@ -257,9 +257,9 @@ const details = () => {
                     }} className='absolute left-0 bottom-[-50px] bg-white text-black p-3 w-full flex justify-between items-center z-20'>
                      <p>Children</p>
                       <div className='flex items-center gap-3'>
-                        <button className='cursor-pointer' disabled={child === 0} onClick={()=>setChildren(prev => prev - 1)}>-</button>
+                        <button className='cursor-pointer' disabled={children === 0} onClick={()=>setChildren(prev => prev - 1)}>-</button>
                         <p>{children}</p>
-                        <button className='cursor-pointer' onClick={()=>setChild(prev => prev + 1)}>+</button>
+                        <button className='cursor-pointer' onClick={()=>setChildren(prev => prev + 1)}>+</button>
                       </div>
                     </div>
                   )
